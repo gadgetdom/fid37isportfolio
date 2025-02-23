@@ -94,6 +94,8 @@ const Home = () => {
                 </div>
             </section>
             <section className="certifications-section">
+            <h1>Certifications</h1>
+            <h4>Showcasing the Pinnacle of Achievement: My Badge of Expertise and Certifications</h4>
                 <CertificationSec />
             </section>
         </motion.div>
