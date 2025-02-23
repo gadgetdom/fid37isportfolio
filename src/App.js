@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import DevOps from './pages/DevOps';
+import MyWorks from './pages/MyWorks';
+import Blog from './pages/Blog';
+import Archives from './pages/Archives';
+import Footer from './components/Footer';
+import { AnimatePresence } from 'framer-motion';
+import './styles/App.css';
 
 function App() {
+  const myName = "FIDELIS AGBA";
+  const phoneNumber = "+2348085952266";
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App min-h-screen flex flex-col">
+        <Navbar name={myName} phoneNumber={phoneNumber} />
+        <AnimatePresence mode="wait">
+          <main className="content flex-grow p-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/devops" element={<DevOps />} />
+              <Route path="/work" element={<MyWorks />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/archives" element={<Archives />} />
+            </Routes>
+          </main>
+        </AnimatePresence>
+        <Footer name={myName} />
+      </div>
+    </Router>
   );
 }
 

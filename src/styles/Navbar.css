@@ -1,0 +1,228 @@
+.nav-link {
+    color: #4CAF50;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #2C6B2F;
+}
+
+.nav-link-mobile {
+    color: #4CAF50;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link-mobile:hover {
+    background-color: #f3f4f6;
+    color: #2C6B2F;
+}
+
+.navbar-name a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.name-first {
+    background-color: #2C6B2F;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 2px 0 0 2px;
+    font-weight: 500;
+}
+
+a.icon-link {
+    font-size: 24px;
+}
+
+.name-last {
+    background-color: white;
+    color: #2C6B2F;
+    padding: 0 8px;
+    font-weight: 600;
+}
+
+/* Optional: add a hover effect */
+.navbar-name a:hover .name-first,
+.navbar-name a:hover .name-last {
+    opacity: 0.9;
+}
+
+.navbar-menu a.active {
+    color: #4CAF50;
+    position: relative;
+}
+
+.navbar-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: #4CAF50;
+    border-radius: 1.5px;
+}
+
+/* Hamburger menu styling */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation */
+.hamburger-line.open:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-line.open:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-line.open:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    nav.navbar {
+        height: 6rem;
+    }
+
+    .hamburger {
+        display: flex;
+        position: absolute;
+        right: 1rem;
+        top: 1.5rem;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        flex-direction: column;
+        background-color: white;
+        top: 4rem;
+        left: 0;
+        right: 0;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+        z-index: 10;
+    }
+
+    .navbar-menu.open {
+        height: auto;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-menu a {
+        padding: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar-contact {
+        position: absolute;
+        margin-right: 3rem;
+        top: 3rem;
+    }
+}
+
+/* Additional breakpoint for mobile */
+@media (max-width: 480px) {
+    .navbar-name {
+        font-size: 0.5rem;
+    }
+
+    .name-first,
+    .name-last {
+        padding: 3px 6px;
+    }
+
+    .whatsapp-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .navbar-contact {
+        right: 3.5rem;
+    }
+}
+
+/* Additional breakpoint for large screens */
+@media (min-width: 1200px) {
+    .navbar {
+        padding: 0 4rem;
+    }
+
+    .navbar-menu {
+        gap: 3rem;
+    }
+
+    .name-first,
+    .name-last {
+        padding: 6px 12px;
+        font-size: 1.3rem;
+    }
+}
+
+.navbar {
+    background-color: white;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6rem;
+    height: 4rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-name {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 2rem;
+    transition: all 0.3s ease;
+}
+
+.navbar a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: #4CAF50;
+}
