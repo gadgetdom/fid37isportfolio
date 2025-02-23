@@ -1,5 +1,6 @@
 .page-header {  
-    width: 100%;  
+    width: 100%;
+    margin-top: -1%;
     display: flex;  
     align-items: center;  
     justify-content: space-between;

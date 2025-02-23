@@ -8,17 +8,35 @@ const Navbar = ({ name }) => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
 
+    // Function to handle link clicks
+    const handleLinkClick = () => {
+        setIsOpen(false); // Close the menu when a link is clicked
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-container">
                 <div className="navbar-name">
-                    <Link to="/" className="text-xl font-bold text-[#2C6B2F] no-underline" style={{ textDecoration: "none" }}>
-                        <span className="name-first" style={{ textDecoration: "none" }}>{firstName}</span> <span className="name-last" style={{ textDecoration: "none" }}>{lastName}</span>
+                    <Link 
+                        to="/" 
+                        className="text-xl font-bold text-[#2C6B2F] no-underline" 
+                        style={{ textDecoration: "none" }}
+                        onClick={handleLinkClick} // Close menu when logo is clicked
+                    >
+                        <span className="name-first">{firstName}</span>{" "}
+                        <span className="name-last">{lastName}</span>
                     </Link>
                 </div>
 
-                <div className="hamburger md:hidden" onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <FaTimes size={24} className="text-[#4CAF50]" /> : <FaBars size={24} className="text-[#4CAF50]" />}
+                <div 
+                    className="hamburger md:hidden" 
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {isOpen ? (
+                        <FaTimes size={24} className="text-[#4CAF50]" />
+                    ) : (
+                        <FaBars size={24} className="text-[#4CAF50]" />
+                    )}
                 </div>
 
                 {/* Right-aligned Menu */}
@@ -29,8 +47,18 @@ const Navbar = ({ name }) => {
                         { path: "/blog", label: "Blog" },
                         { path: "/archives", label: "Archives" }
                     ].map(({ path, label }) => (
-                        <Link key={path} to={path} className={`nav-link ${location.pathname === path ? "active text-[#2C6B2F]" : ""}`}>
-                            {label} {location.pathname === path && <FaCheck className="check-mark" />}
+                        <Link 
+                            key={path} 
+                            to={path} 
+                            className={`nav-link ${
+                                location.pathname === path ? "active text-[#2C6B2F]" : ""
+                            }`}
+                            onClick={handleLinkClick} // Close menu when any link is clicked
+                        >
+                            {label}{" "}
+                            {location.pathname === path && (
+                                <FaCheck className="check-mark" />
+                            )}
                         </Link>
                     ))}
                 </div>
