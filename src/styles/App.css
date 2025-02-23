@@ -50,13 +50,6 @@ body {
   box-sizing: inherit;
 }
 
-.no-select {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE/Edge */
-  user-select: none; 
-}
-
 /* Ensure content displays correctly with mobile menu */
 @media (max-width: 768px) {
   .content {
@@ -88,8 +81,13 @@ p, li, span, a {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Responsive grid container */
@@ -102,19 +100,16 @@ p, li, span, a {
 .card-container {
   perspective: 1000px;
   width: 100%;
-  height: 300px;
+  max-width: 300px;
+  height: 250px;
 }
 
 .card {
-  width: 80%;
-  height: 80%;
-  position: relative;
-  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
   transition: transform 0.6s;
-  z-index: 1;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
 .card.flip {
@@ -122,30 +117,17 @@ p, li, span, a {
 }
 
 .card-front, .card-back {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border: 2px solid #BCF8BE;
-  z-index: 2;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .card-back {
   transform: rotateY(180deg);
-  z-index: 1;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 16px;
-}
 
 /* Responsive card container */
 @media (max-width: 768px) {

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './ui/card';
 import '../styles/App.css'
+import prmgmCert from '../assets/prmgm-cert.png';
+import promgmtCert from '../assets/Promgmt-certificate.png';
+import udemyCert from '../assets/udemy-cert.png';
 
 const CertificationSec = () => {
     const certifications = [
@@ -9,28 +12,28 @@ const CertificationSec = () => {
             title: "Product Management",
             issuer: "DevCareer X UK-Nigeria Tech Hub",
             date: "2024",
-            certificateUrl: "../assets/prmgm-cert.png"
+            certificateUrl: prmgmCert
         },
         {
             id: 2,
             title: "Product Management 2",
             issuer: "Great Learning",
             date: "2023",
-            certificateUrl: "../assets/Promgmt-certificate.png"
+            certificateUrl: promgmtCert
         },
         {
             id: 3,
             title: "Azure Developer Associate",
             issuer: "Will be added soon",
             date: "2012",
-            certificateUrl: "../assets/udemy-cert.png"
+            certificateUrl: udemyCert
         },
         {
             id: 4,
             title: "Software Testing",
             issuer: "Udemy",
             date: "2022",
-            certificateUrl: "../assets/udemy-cert.png"
+            certificateUrl: udemyCert
         }
     ];
 
