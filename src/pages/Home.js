@@ -3,6 +3,7 @@ import '../styles/Home.css';
 import gg from '../assets/gg.png';
 import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
+import CertificationSec from '../components/Certifications';
 
 const Home = () => {
     const [hovered, setHovered] = useState(false);
@@ -44,7 +45,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             className="home-container mx-auto text-center max-w-4xl"
         >
-            <PageHeader title="Welcome" />
+            <PageHeader title="About Me" />
             <section
                 className="first-section flex flex-col items-center"
                 onMouseEnter={() => setHovered(true)}
@@ -91,6 +92,9 @@ const Home = () => {
                         </div>
                     ))}
                 </div>
+            </section>
+            <section className="certifications-section">
+                <CertificationSec />
             </section>
         </motion.div>
     );
