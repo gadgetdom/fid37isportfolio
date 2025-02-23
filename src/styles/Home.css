@@ -11,6 +11,17 @@ h1 {
     filter: brightness(1.2) saturate(1.1);
     transform: scale(1.05);
 }
+.content-container {  
+    max-width: 1200px; /* Match the navbar's max-width */  
+    margin: 0 auto; /* Center the content */  
+    padding: 1rem 2rem; /* Match the navbar's padding for consistency */  
+} 
+
+.home-container {
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
 
 .first-section {
     display: flex;
@@ -24,7 +35,7 @@ h1 {
 /* Desktop layout */
 .text-column {
     transition: transform 0.3s ease-in-out;
-    text-align: left;
+    text-align: center;
     max-width: 600px;
     line-height: 30px;
 }

@@ -1,0 +1,5 @@
+.content-container {  
+    max-width: 1200px; /* Match the navbar's max-width */  
+    margin: 0 auto; /* Center the content */  
+    padding: 1rem 2rem; /* Match the navbar's padding for consistency */  
+} 

@@ -5,7 +5,6 @@ import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
 
 const Home = () => {
-
     const [hovered, setHovered] = useState(false);
     const [randomSkills, setRandomSkills] = useState([]);
     const [bgImage, setBgImage] = useState('');
@@ -43,10 +42,11 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            className="home-container mx-auto text-center max-w-4xl"
         >
             <PageHeader title="Welcome" />
             <section
-                className="first-section"
+                className="first-section flex flex-col items-center"
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
             >
@@ -55,7 +55,7 @@ const Home = () => {
                         <img src={gg} alt="Descriptive Alt" />
                     </div>
                 )}
-                <div className={`text-column ${hovered ? 'shifted' : ''}`}>
+                <div className={`text-column ${hovered ? 'shifted' : ''} max-w-2xl` }>
                     <p>
                         I am a versatile professional with expertise in computer troubleshooting, UX research, UI/UX design, and frontend development (HTML, CSS, JavaScript). Skilled in software QA (manual & automated) and ensuring top-notch functionality. Experienced in graphic design, product management, and Scrum Master roles, offering a holistic product lifecycle understanding. Currently exploring DevOps to enhance full-stack capabilities. Passionate about creating innovative, user-centered tech solutions.
                     </p>

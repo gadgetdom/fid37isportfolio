@@ -8,6 +8,12 @@
   display: flex;
   flex-direction: column;
 }
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none; 
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -17,6 +23,11 @@ body {
   font-family: 'Poppins', 'Montserrat', sans-serif;
   box-sizing: border-box;
 }
+.content-container {  
+  max-width: 1200px; /* Match the navbar's max-width */  
+  margin: 0 auto; /* Center the content */  
+  padding: 1rem 2rem; /* Match the navbar's padding for consistency */  
+} 
 
 .icon-container {
   display: flex;
