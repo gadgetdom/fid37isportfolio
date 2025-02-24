@@ -5,7 +5,7 @@ import '../styles/DevOps.css'; // Import external CSS
 
 const DevOps = () => {
     const projects = {
-        UI_UX: [
+        Linux: [
             {
                 title: "Cloud Migration Project",
                 description: "Led the migration of legacy systems to AWS cloud infrastructure.",
@@ -19,7 +19,95 @@ const DevOps = () => {
                 link: "https://github.com/yourusername/project2"
             }
         ],
-        Frontend: [
+        "Bash Scripting": [
+            {
+                title: "Infrastructure Automation",
+                description: "Created IaC templates for scalable cloud resources.",
+                tech: "Terraform, Ansible, AWS",
+                link: "https://github.com/yourusername/project3"
+            }
+        ],
+        Networking: [
+            {
+                title: "Cloud Migration Project",
+                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
+                tech: "AWS, Terraform, Docker",
+                link: "https://github.com/yourusername/project1"
+            },
+            {
+                title: "CI/CD Pipeline Implementation",
+                description: "Developed automated deployment pipelines for microservices architecture.",
+                tech: "Jenkins, Kubernetes, GitLab",
+                link: "https://github.com/yourusername/project2"
+            }
+        ],
+        "Ci/CD": [
+            {
+                title: "Infrastructure Automation",
+                description: "Created IaC templates for scalable cloud resources.",
+                tech: "Terraform, Ansible, AWS",
+                link: "https://github.com/yourusername/project3"
+            }
+        ],
+        Docker: [
+            {
+                title: "Cloud Migration Project",
+                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
+                tech: "AWS, Terraform, Docker",
+                link: "https://github.com/yourusername/project1"
+            },
+            {
+                title: "CI/CD Pipeline Implementation",
+                description: "Developed automated deployment pipelines for microservices architecture.",
+                tech: "Jenkins, Kubernetes, GitLab",
+                link: "https://github.com/yourusername/project2"
+            }
+        ],
+        "Containerization": [
+            {
+                title: "Infrastructure Automation",
+                description: "Created IaC templates for scalable cloud resources.",
+                tech: "Terraform, Ansible, AWS",
+                link: "https://github.com/yourusername/project3"
+            }
+        ],
+        AWS: [
+            {
+                title: "Cloud Migration Project",
+                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
+                tech: "AWS, Terraform, Docker",
+                link: "https://github.com/yourusername/project1"
+            },
+            {
+                title: "CI/CD Pipeline Implementation",
+                description: "Developed automated deployment pipelines for microservices architecture.",
+                tech: "Jenkins, Kubernetes, GitLab",
+                link: "https://github.com/yourusername/project2"
+            }
+        ],
+        "Kubernetes": [
+            {
+                title: "Infrastructure Automation",
+                description: "Created IaC templates for scalable cloud resources.",
+                tech: "Terraform, Ansible, AWS",
+                link: "https://github.com/yourusername/project3"
+            }
+        ],
+        GitOps: [
+            {
+                title: "Cloud Migration Project",
+                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
+                tech: "AWS, Terraform, Docker",
+                link: "https://github.com/yourusername/project1"
+            },
+            {
+                title: "CI/CD Pipeline Implementation",
+                description: "Developed automated deployment pipelines for microservices architecture.",
+                tech: "Jenkins, Kubernetes, GitLab",
+                link: "https://github.com/yourusername/project2"
+            }
+        ],
+        "Ansible": [
             {
                 title: "Infrastructure Automation",
                 description: "Created IaC templates for scalable cloud resources.",
@@ -27,9 +115,12 @@ const DevOps = () => {
                 link: "https://github.com/yourusername/project3"
             }
         ]
+
+
+
     };
 
-    const [selectedCategory, setSelectedCategory] = useState('UI_UX');
+    const [selectedCategory, setSelectedCategory] = useState('Linux');
     const [isMobile, setIsMobile] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -44,9 +135,7 @@ const DevOps = () => {
 
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
-        if (isMobile) {
-            setDropdownOpen(false);
-        }
+        setDropdownOpen(false); // Close dropdown when selecting an option
     };
 
     return (
@@ -57,13 +146,13 @@ const DevOps = () => {
                 <div className="devops-content md:w-3/4">
                     {/* Mobile Dropdown */}
                     {isMobile && (
-                        <div className="mobile-menu-dropdown mb-6 fixed top-16 right-4 bg-white z-10 px-4 border rounded shadow-lg">
-                            <div className="selected-menu-header flex justify-between items-center p-3 border-b cursor-pointer bg-white" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                                <span className="font-medium">Menu</span>
-                                <span className="transform transition-transform duration-200" style={{ transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
+                        <div className="mobile-menu-dropdown mb-6">
+                            <div className="selected-menu-header flex justify-between items-center p-3 border rounded cursor-pointer bg-white" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                                <span className="font-medium">{selectedCategory}</span>
+                                <span className={`transform transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`}>▼</span>
                             </div>
                             {dropdownOpen && (
-                                <div className="menu-dropdown-content border-t max-h-48 overflow-y-auto bg-white">
+                                <div className="menu-dropdown-content border rounded mt-1 max-h-48 overflow-y-auto bg-white shadow-lg">
                                     {Object.keys(projects).map((category) => (
                                         <div key={category} className={`p-3 cursor-pointer hover:bg-gray-100 ${selectedCategory === category ? 'bg-gray-100 font-medium text-[#4CAF50]' : ''}`} onClick={() => handleCategorySelect(category)}>
                                             {category}
