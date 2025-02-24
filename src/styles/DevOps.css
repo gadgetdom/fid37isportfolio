@@ -3,3 +3,85 @@
     margin: 0 auto; /* Center the content */  
     padding: 1rem 2rem; /* Match the navbar's padding for consistency */  
 } 
+
+/* General layout */
+.devops-container {
+    display: flex;
+    max-width: 1280px;
+    margin: auto;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0; 
+}
+ul, li{
+    margin: 15px 0;
+}
+
+
+/* Sidebar */
+.devops-sidebar {
+    width: 100%;
+    max-width: 250px;
+    background-color: #4CAF50;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+/* Sidebar button styles */
+.devops-sidebar button {
+    background-color: transparent;
+    color: white;
+    width: 80%;
+    text-align: left;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out;
+    border: none;
+    font-size: medium;
+}
+
+.devops-sidebar button.active {
+    background-color: White;
+    color: #2C6B2F;
+    font-weight: bold;
+}
+
+.devops-sidebar button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Content area */
+.devops-content {
+    flex-grow: 1;
+    padding: 1.5rem;
+}
+
+/* Project card */
+.devops-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.devops-card:hover {
+    transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .devops-container {
+        flex-direction: column;
+    }
+
+    .devops-sidebar {
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+}
