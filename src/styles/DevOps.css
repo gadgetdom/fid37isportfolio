@@ -1,5 +1,89 @@
-.content-container {  
-    max-width: 1200px; /* Match the navbar's max-width */  
-    margin: 0 auto; /* Center the content */  
-    padding: 1rem 2rem; /* Match the navbar's padding for consistency */  
-} 
+/* General container styling */
+.devops-container {
+    display: flex;
+    max-width: 1280px;
+    margin: -3% auto;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+/* Project card */
+.devops-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.devops-card:hover {
+    transform: scale(1.02);
+}
+
+/* Main content area */
+.devops-content {
+    flex: 1;
+}
+
+/* Vertical menu styling (desktop only) */
+.devops-menu {
+    width: 200px;
+    padding-left: 1.5rem;
+
+}
+
+/* Mobile menu dropdown */
+.mobile-menu-dropdown {
+    position: relative;
+}
+
+.selected-menu-header {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-dropdown-content {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.menu-dropdown-content div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu-dropdown-content div:hover {
+    background-color: #f5f5f5;
+}
+
+/* Buttons inside vertical menu */
+.devops-menu ul li button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.devops-menu ul li button:hover,
+.devops-menu ul li button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .devops-menu {
+        display: none; /* Hide right-side menu on mobile */
+    }
+}

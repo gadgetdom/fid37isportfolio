@@ -23,6 +23,7 @@ ul, li{
     background-color: #f3f4f6;
     padding: 1.5rem;
     border-radius: 8px;
+    height: 300px;
 }
 
 /* Sidebar button styles */
@@ -37,13 +38,13 @@ ul, li{
 }
 
 .myworks-sidebar button.active {
-    background-color: #2C6B2F;
+    background-color: #4CAF50;
     color: white;
     font-weight: bold;
 }
 
 .myworks-sidebar button:hover {
-    background-color: #4CAF50;
+    background-color: #2C6B2F;
     color: white;
 }
 
