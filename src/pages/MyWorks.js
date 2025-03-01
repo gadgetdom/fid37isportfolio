@@ -21,10 +21,16 @@ const MyWorks = () => {
         ],
         Frontend: [
             {
-                title: "Infrastructure Automation",
-                description: "Created IaC templates for scalable cloud resources.",
-                tech: "Terraform, Ansible, AWS",
-                link: "https://github.com/yourusername/project3"
+                title: "Baobab Partners",
+                description: "I optimized the UI/UX of my previous company to increased user engagement and interaction.",
+                tech: "Html, CSS, React, JavaScript",
+                link: "https://baobabpartners.netlify.app/"
+            }, 
+            {
+                title: "Phyls Gadgets",
+                description: "I designed and developed an E-commerce web application that enables users to effortlessly find and purchase high-quality, durable gadgets.",
+                tech: "Html, CSS, React, JavaScript",
+                link: "https://phylsgadgets.netlify.app/"
             }
         ]
     };
