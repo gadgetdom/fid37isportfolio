@@ -1,159 +1,110 @@
-/* UIUXWorks.css */  
+/* UI/UX Works Container */
+.uiuxworks-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
 
-/* General Styling */  
-body {  
-    font-family: Arial, sans-serif;  
-    margin: 0;  
-    padding: 0;  
-    background-color: #f0f0f0;  
-}  
+/* UI/UX Project Card */
+.uiuxworks-card {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    margin-top: -px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
 
-/* Container for all cards */  
-.works-container {  
-    display: flex;  
-    flex-wrap: wrap;  
-    justify-content: space-around; /* Center the cards */  
-    padding: 20px;  
-}  
+/* Image Container */
+.uiuxworks-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 
-/* Card Styling */  
-.myworks-card {  
-    position: relative;  
-    background-color: white;  
-    border-radius: 8px;  
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
-    overflow: hidden; /* Ensure no overflow */  
-    height: 300px; /* Set a fixed height for cards */  
-    width: 300px; /* Optional: set a fixed width */  
-    margin: 15px; /* Spacing between cards */  
-}  
+.uiuxworks-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-/* Image Style */  
-.myworks-card img {  
-    width: 100%;  
-    height: 100%;  
-    object-fit: cover; /* Fills the card without distortion */  
-    transition: transform 0.3s; /* Animation on hover */  
-}  
+/* Overlay (Now only underneath details) */
+.uiuxworks-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-.myworks-card img:hover {  
-    transform: scale(1.05); /* Scale effect on hover */  
-}  
+/* Project Info */
+.uiuxworks-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 
-/* Overlay Styling */  
-.overlay {  
-    position: absolute;  
-    top: 0;  
-    left: 0;  
-    width: 100%;  
-    height: 40%; /* Adjust height to cover part of the card */  
-    display: flex;  
-    flex-direction: column; /* Stack elements vertically */  
-    justify-content: flex-end; /* Space starts from the bottom */  
-    padding: 20px;  
-    color: white;  
-    background: rgba(0, 0, 0, 0.5); /* Dark background for readability */  
-}  
+/* Title & Description */
+.uiuxworks-text h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
 
-/* Project Title and Description */  
-.overlay h3 {  
-    margin: 0;  
-    font-size: 1.5em; /* Adjust font size for title */  
-}  
+.uiuxworks-text p {
+    font-size: 14px;
+    opacity: 0.9;
+}
 
-.overlay p {  
-    margin: 5px 0; /* Add some margin for spacing */  
-}  
+.uiuxworks-tool {
+    font-size: 12px;
+    font-style: italic;
+    opacity: 0.8;
+}
 
-/* Button Styles */  
-button {  
-    cursor: pointer;  
-}  
+/* View Prototype Button */
+.uiuxworks-button {
+    background: #4CAF50;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
 
-/* Lightbox Styles */  
-.lightbox-overlay {  
-    position: fixed;  
-    top: 0;  
-    left: 0;  
-    right: 0;  
-    bottom: 0;  
-    background-color: rgba(0, 0, 0, 0.9);  
-    display: flex;  
-    justify-content: center;  
-    align-items: center;  
-    z-index: 1000;  
-}  
+.uiuxworks-button:hover {
+    background: #2C6B2F;
+}
 
-.lightbox-content {  
-    position: relative;  
-    width: 80%;  
-    max-width: 800px; /* Limits the max size */  
-    display: flex;  
-    flex-direction: column; /* Stack lightbox content */  
-    align-items: center;  
-}  
+/* Navigation Buttons */
+.uiuxworks-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
-.lightbox-content img {  
-    max-width: 100%;  
-    max-height: 80vh; /* Prevents overflow */  
-    object-fit: contain;  
-    display: block;  
-}  
+.uiuxworks-nav.left {
+    left: 10px;
+}
 
-/* Close Button */  
-.close {  
-    position: absolute;  
-    top: 10px;  
-    right: 20px;  
-    background-color: rgba(255, 255, 255, 0.2);  
-    color: white;  
-    font-size: 24px;  
-    border: none;  
-    padding: 10px;  
-    border-radius: 50%;  
-}  
+.uiuxworks-nav.right {
+    right: 10px;
+}
 
-/* Navigation Buttons */  
-.left,   
-.right {  
-    background-color: rgba(0, 0, 0, 0.5);  
-    color: white;  
-    padding: 10px 15px;  
-    border: none;  
-    border-radius: 50%;  
-    cursor: pointer;  
-    position: absolute; /* Ensures they overlap the image */  
-    top: 50%;  
-    transform: translateY(-50%); /* Center vertically */  
-    font-size: 18px;  
-}  
-
-.left {  
-    left: 10px;  
-}  
-
-.right {  
-    right: 10px;  
-}  
-
-/* Image Counter */  
-.counter {  
-    position: absolute;  
-    bottom: 20px;  
-    left: 50%;  
-    transform: translateX(-50%);  
-    color: white;  
-    background-color: rgba(0, 0, 0, 0.7);  
-    padding: 5px 10px;  
-    border-radius: 5px;  
-}  
-
-.view-prototype {  
-    color: #1DA1F2; /* Twitter blue for links */  
-    text-decoration: none;  
-    margin-top: 10px; /* Add some margin above link */  
-}  
-
-.view-prototype:hover {  
-    text-decoration: underline; /* Underline on hover */  
-}  
+.uiuxworks-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+}

@@ -1,92 +1,138 @@
-import React, { useState } from 'react';  
-import '../styles/UIUXWorks.css';
+import React, { useState } from "react";
+import "../styles/UIUXWorks.css"; 
 
-const UIUXWorks = ({ projects = [] }) => { 
+const UIUXWorks = ({ projects = [] }) => {
+    const exampleProjects = [
+        {
+            title: "Project One",
+            description:
+                "This is a long description for project one. It contains detailed information about the design process, decisions made, and the overall impact. This will be truncated if too long.",
+            tool: "Figma",
+            images: ["img/few1.png", "img/gg.png", "img/few1.png", "img/gg.png"],
+            prototypeLink: "https://example.com/prototype1",
+        },
+    ];
 
-    const defaultProjects = [  
-        {  
-            title: "Project One",  
-            description: "Description for project one.",  
-            images: [  
-                "https://example.com/image1.jpg",  
-                "https://example.com/image2.jpg",  
-            ],  
-            prototypeLink: "https://example.com/prototype1"  
-        },  
-        // ... more projects  
-    ];  
-    
-    projects = projects.length ? projects : defaultProjects;
+    const projectsToRender = projects.length > 0 ? projects : exampleProjects;
+    const [expandedIndex, setExpandedIndex] = useState(null);
+    const [imagePreview, setImagePreview] = useState({
+        isOpen: false,
+        projectIndex: 0,
+        imageIndex: 0,
+    });
 
-    const [lightbox, setLightbox] = useState({  
-        isOpen: false,  
-        projectIndex: 0,  
-        imageIndex: 0,  
-    });  
+    const toggleExpand = (index) => {
+        setExpandedIndex(expandedIndex === index ? null : index);
+    };
 
-    const openLightbox = (index) => {  
-        setLightbox({ isOpen: true, projectIndex: index, imageIndex: 0 });  
-    };  
+    const openImagePreview = (projectIndex) => {
+        setImagePreview({ isOpen: true, projectIndex, imageIndex: 0 });
+    };
 
-    const closeLightbox = () => {  
-        setLightbox({ ...lightbox, isOpen: false });  
-    };  
+    const closeImagePreview = () => {
+        setImagePreview({ ...imagePreview, isOpen: false });
+    };
 
-    const handleNext = () => {  
-        setLightbox((prev) => ({  
-            ...prev,  
-            imageIndex: (prev.imageIndex + 1) % projects[prev.projectIndex].images.length,  
-        }));  
-    };  
+    const handleNextImage = () => {
+        setImagePreview((prev) => ({
+            ...prev,
+            imageIndex:
+                (prev.imageIndex + 1) %
+                projectsToRender[prev.projectIndex].images.length,
+        }));
+    };
 
-    const handlePrev = () => {  
-        setLightbox((prev) => ({  
-            ...prev,  
-            imageIndex: (prev.imageIndex - 1 + projects[prev.projectIndex].images.length) % projects[prev.projectIndex].images.length,  
-        }));  
-    };  
+    const handlePrevImage = () => {
+        setImagePreview((prev) => ({
+            ...prev,
+            imageIndex:
+                (prev.imageIndex - 1 +
+                    projectsToRender[prev.projectIndex].images.length) %
+                projectsToRender[prev.projectIndex].images.length,
+        }));
+    };
 
-    return (  
-        <>  
-            <div className="works-container">  
-                {projects.length > 0 ? (  
-                    projects.map((project, index) => (  
-                        <div className="myworks-card" key={index}>  
-                            <img   
-                                src={project.images[0]} // Use the first image for the card preview  
-                                alt={project.title}  
-                                onClick={() => openLightbox(index)}  
-                            />  
-                            <div className="overlay">  
-                                <h3>{project.title}</h3>  
-                                <p>{project.description}</p>  
-                                <a href={project.prototypeLink} className="view-prototype" target="_blank" rel="noopener noreferrer">View Prototype</a>  
-                            </div>  
-                        </div>  
-                    ))  
-                ) : (  
-                    <p>No projects available</p> // Message for no projects  
-                )}  
-            </div>  
+    return (
+        <>
+            <div className="uiuxworks-container">
+                {projectsToRender.map((project, index) => {
+                    const isExpanded = expandedIndex === index;
+                    const truncatedDescription = project.description.slice(0, 100);
+                    return (
+                        <div className="uiuxworks-card" key={index}>
+                            {/* Image Preview Container */}
+                            <div className="uiuxworks-image-container">
+                                <img
+                                    src={project.images[0]}
+                                    alt={project.title}
+                                    className="uiuxworks-image"
+                                    onClick={() => openImagePreview(index)}
+                                />
+                            </div>
 
-            {lightbox.isOpen && (  
-                <div className="lightbox-overlay" onClick={closeLightbox}>  
-                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>  
-                        <img   
-                            src={projects[lightbox.projectIndex].images[lightbox.imageIndex]}   
-                            alt={projects[lightbox.projectIndex].title}  
-                        />  
-                        <button className="close" onClick={closeLightbox}>✕</button>  
-                        <button className="left" onClick={handlePrev}>◀</button>  
-                        <button className="right" onClick={handleNext}>▶</button>  
-                        <div className="counter">  
-                            {lightbox.imageIndex + 1} / {projects[lightbox.projectIndex].images.length}  
-                        </div>  
-                    </div>  
-                </div>  
-            )}  
-        </>  
-    );  
-};  
+                            {/* Details Section */}
+                            <div className="uiuxworks-overlay">
+                                <div className="uiuxworks-info">
+                                    {/* Left Column: Title & Description */}
+                                    <div className="uiuxworks-text">
+                                        <h3>{project.title}</h3>
+                                        <p>
+                                            {isExpanded
+                                                ? project.description
+                                                : `${truncatedDescription}...`}
+                                        </p>
+                                        <button
+                                            className="uiuxworks-view-more"
+                                            onClick={() => toggleExpand(index)}
+                                        >
+                                            {isExpanded ? "View Less" : "View More"}
+                                        </button>
+                                    </div>
 
-export default UIUXWorks;  
+                                    {/* Right Column: Tool & Button */}
+                                    <div className="uiuxworks-actions">
+                                        <span className="uiuxworks-tool">Tool: {project.tool}</span>
+                                        <a
+                                            href={project.prototypeLink}
+                                            className="uiuxworks-button"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            View Prototype
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Inline Image Preview */}
+                            {imagePreview.isOpen && imagePreview.projectIndex === index && (
+                                <div className="inline-preview">
+                                    <button className="inline-preview-close" onClick={closeImagePreview}>
+                                        ✕
+                                    </button>
+                                    <button className="inline-preview-nav left" onClick={handlePrevImage}>
+                                        ◀
+                                    </button>
+                                    <img
+                                        src={
+                                            projectsToRender[imagePreview.projectIndex].images[
+                                            imagePreview.imageIndex
+                                            ]
+                                        }
+                                        alt="Project preview"
+                                        className="inline-preview-image"
+                                    />
+                                    <button className="inline-preview-nav right" onClick={handleNextImage}>
+                                        ▶
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+        </>
+    );
+};
+
+export default UIUXWorks;
