@@ -1,7 +1,7 @@
 .myworks-card {
     display: grid;
     grid-template-columns: 1fr;
-    height: 400px;
+    height: 400%;
     gap: 1.5rem;
     background: #fff;
     padding: 1.5rem;
@@ -62,11 +62,30 @@
 
 .image-counter {
     position: absolute;
-    bottom: 10px;
+    bottom: -10px;
     left: 10px;
     background: rgba(0, 0, 0, 0.7);
     color: white;
     font-size: 14px;
     padding: 5px 10px;
     border-radius: 5px;
+}
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    text-align: left;
+}
+.project-info a {
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    color: #2C6B2F;
+}
+
+.description-container button {
+    font-size: 14px;
+    border: none;
+    padding: 0.6rem 1rem;
+    
 }
