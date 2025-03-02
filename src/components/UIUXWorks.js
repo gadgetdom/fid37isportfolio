@@ -68,10 +68,11 @@ const UIUXWorks = ({ projects = [] }) => {
                                     className="uiuxworks-image"
                                     onClick={() => openImagePreview(index)}
                                 />
+                                <span className="image-count">{project.images.length} Images</span>
                             </div>
 
                             {/* Details Section */}
-                            <div className="uiuxworks-overlay">
+                            <div className="uiuxworks-overlay" onClick={(e) => e.stopPropagation()}>
                                 <div className="uiuxworks-info">
                                     {/* Left Column: Title & Description */}
                                     <div className="uiuxworks-text">

@@ -3,3 +3,62 @@
     margin: 0 auto; /* Center the content */  
     padding: 1rem 2rem; /* Match the navbar's padding for consistency */  
 } 
+
+.archives-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.archive-section {
+    margin-bottom: 50px;
+}
+
+.archive-year {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #2C6B2F;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.year-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #4CAF50;
+}
+
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.archive-item {
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.archive-item:hover {
+    animation: shake 0.3s ease-in-out;
+}
+
+.archive-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}

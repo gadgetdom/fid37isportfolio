@@ -1,25 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import '../styles/Archives.css';
 
 const Archives = () => {
+    const [open, setOpen] = useState(false);
+    const [currentSlides, setCurrentSlides] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     const archives = [
         {
-            year: "2024",
-            items: [
-                { title: "Cloud Migration Case Study", date: "February 2024" },
-                { title: "Kubernetes Workshop Materials", date: "January 2024" }
+            year: "2025",
+            images: [
+                "img/few1.png",
+                "img/gg.png",
+                "img/few1.png",
+                "img/gg.png"
             ]
         },
         {
-            year: "2023",
-            items: [
-                { title: "DevOps Implementation Guide", date: "December 2023" },
-                { title: "AWS Architecture Templates", date: "November 2023" },
-                { title: "CI/CD Pipeline Documentation", date: "October 2023" }
+            year: "2024",
+            images: [
+                "img/few1.png",
+                "img/gg.png",
+                "img/few1.png",
+                "img/gg.png"
             ]
         }
     ];
+
+    const handleImageClick = (yearImages, index) => {
+        const slides = yearImages.map(image => ({ src: image }));
+        setCurrentSlides(slides);
+        setCurrentIndex(index);
+        setOpen(true);
+    };
 
     return (
         <motion.div
@@ -28,29 +45,27 @@ const Archives = () => {
             transition={{ duration: 0.5 }}
         >
             <PageHeader title="Archives" />
-            <div className="max-w-4xl mx-auto text-left">
+            <div className="archives-container">
                 {archives.map((yearGroup, index) => (
-                    <div key={index} className="mb-8">
-                        <h2 className="text-2xl font-bold text-[#2C6B2F] mb-4">{yearGroup.year}</h2>
-                        <div className="bg-white rounded-lg shadow-lg p-6">
-                            {yearGroup.items.map((item, itemIndex) => (
+                    <div key={index} className="archive-section">
+                        <h2 className="archive-year">{yearGroup.year} <span className="year-line"></span></h2>
+                        <div className="archive-grid">
+                            {yearGroup.images.map((image, imgIndex) => (
                                 <motion.div
-                                    key={itemIndex}
-                                    className="mb-4 last:mb-0"
-                                    whileHover={{ x: 10 }}
+                                    key={imgIndex}
+                                    className="archive-item"
+                                    whileHover={{ rotate: [0, -2, 2, -2, 2, 0] }}
+                                    transition={{ duration: 0.3 }}
+                                    onClick={() => handleImageClick(yearGroup.images, imgIndex)}
                                 >
-                                    <div className="flex justify-between items-center">
-                                        <h3 className="text-lg font-medium text-[#4CAF50]">
-                                            {item.title}
-                                        </h3>
-                                        <span className="text-gray-600">{item.date}</span>
-                                    </div>
+                                    <img src={image} alt={`Archive ${yearGroup.year}`} className="archive-image" />
                                 </motion.div>
                             ))}
                         </div>
                     </div>
                 ))}
             </div>
+            <Lightbox open={open} close={() => setOpen(false)} slides={currentSlides} index={currentIndex} />
         </motion.div>
     );
 };
