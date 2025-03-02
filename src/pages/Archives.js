@@ -12,7 +12,22 @@ const Archives = () => {
 
     const archives = [
         {
-            year: "2025",
+            year: "2023",
+            images: [
+                "/img/archive/1.png",
+                "img/gg.png",
+                "img/few1.png",
+                "img/few1.png",
+                "img/few1.png",
+                "img/few1.png",
+                "img/few1.png",
+                "img/few1.png",
+                "img/few1.png",
+                "img/gg.png"
+            ]
+        },
+        {
+            year: "2022",
             images: [
                 "img/few1.png",
                 "img/gg.png",
@@ -21,12 +36,18 @@ const Archives = () => {
             ]
         },
         {
-            year: "2024",
+            year: "2021",
             images: [
-                "img/few1.png",
-                "img/gg.png",
-                "img/few1.png",
-                "img/gg.png"
+                "/img/archive/2021/1.png",
+                "/img/archive/2021/2.png",
+                "/img/archive/2021/3.png",
+                "/img/archive/2021/4.png",
+                "/img/archive/2021/5.png",
+                "/img/archive/2021/6.png",
+                "/img/archive/2021/7.png",
+                "/img/archive/2021/8.png",
+                "/img/archive/2021/8.png",
+                "/img/archive/2021/10.png",
             ]
         }
     ];

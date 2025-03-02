@@ -7,112 +7,112 @@ const DevOps = () => {
     const projects = {
         Linux: [
             {
-                title: "Cloud Migration Project",
-                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
-                tech: "AWS, Terraform, Docker",
-                link: "https://github.com/yourusername/project1"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             },
             {
-                title: "CI/CD Pipeline Implementation",
-                description: "Developed automated deployment pipelines for microservices architecture.",
-                tech: "Jenkins, Kubernetes, GitLab",
-                link: "https://github.com/yourusername/project2"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         "Bash Scripting": [
             {
-                title: "Infrastructure Automation",
-                description: "Created IaC templates for scalable cloud resources.",
-                tech: "Terraform, Ansible, AWS",
-                link: "https://github.com/yourusername/project3"
+                ttitle: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         Networking: [
             {
-                title: "Cloud Migration Project",
-                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
-                tech: "AWS, Terraform, Docker",
-                link: "https://github.com/yourusername/project1"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             },
             {
-                title: "CI/CD Pipeline Implementation",
-                description: "Developed automated deployment pipelines for microservices architecture.",
-                tech: "Jenkins, Kubernetes, GitLab",
-                link: "https://github.com/yourusername/project2"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         "Ci/CD": [
             {
-                title: "Infrastructure Automation",
-                description: "Created IaC templates for scalable cloud resources.",
-                tech: "Terraform, Ansible, AWS",
-                link: "https://github.com/yourusername/project3"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         Docker: [
             {
-                title: "Cloud Migration Project",
-                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
-                tech: "AWS, Terraform, Docker",
-                link: "https://github.com/yourusername/project1"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             },
             {
-                title: "CI/CD Pipeline Implementation",
-                description: "Developed automated deployment pipelines for microservices architecture.",
-                tech: "Jenkins, Kubernetes, GitLab",
-                link: "https://github.com/yourusername/project2"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         "Containerization": [
             {
-                title: "Infrastructure Automation",
-                description: "Created IaC templates for scalable cloud resources.",
-                tech: "Terraform, Ansible, AWS",
-                link: "https://github.com/yourusername/project3"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         AWS: [
             {
-                title: "Cloud Migration Project",
-                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
-                tech: "AWS, Terraform, Docker",
-                link: "https://github.com/yourusername/project1"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             },
             {
-                title: "CI/CD Pipeline Implementation",
-                description: "Developed automated deployment pipelines for microservices architecture.",
-                tech: "Jenkins, Kubernetes, GitLab",
-                link: "https://github.com/yourusername/project2"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         "Kubernetes": [
             {
-                title: "Infrastructure Automation",
-                description: "Created IaC templates for scalable cloud resources.",
-                tech: "Terraform, Ansible, AWS",
-                link: "https://github.com/yourusername/project3"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         GitOps: [
             {
-                title: "Cloud Migration Project",
-                description: "Led the migration of legacy systems to AWS cloud infrastructure.",
-                tech: "AWS, Terraform, Docker",
-                link: "https://github.com/yourusername/project1"
+                ttitle: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             },
             {
-                title: "CI/CD Pipeline Implementation",
-                description: "Developed automated deployment pipelines for microservices architecture.",
-                tech: "Jenkins, Kubernetes, GitLab",
-                link: "https://github.com/yourusername/project2"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ],
         "Ansible": [
             {
-                title: "Infrastructure Automation",
-                description: "Created IaC templates for scalable cloud resources.",
-                tech: "Terraform, Ansible, AWS",
-                link: "https://github.com/yourusername/project3"
+                title: "Watch Out for update as this is my current drive",
+                description: "",
+                tech: "",
+                link: ""
             }
         ]
 

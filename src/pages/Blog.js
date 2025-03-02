@@ -2,27 +2,39 @@ import React, { useState, useEffect } from 'react';
 import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import '../styles/Blog.css';
 
 const Blog = () => {
     const [mediumPosts, setMediumPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isMobile, setIsMobile] = useState(true);
 
+    // Effect for fetching posts from Medium
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchMediumPosts = async () => {
             try {
-                const response = await axios.get('./api/medium-posts');
-                setMediumPosts(response.data);
+                const mediumUsername = '@mistarfid'; 
+                const response = await axios.get(
+                    `./api/medium-posts?username=${encodeURIComponent(mediumUsername)}`
+                );
+                
+                if (response.data && Array.isArray(response.data)) {
+                    setMediumPosts(response.data);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+                
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching posts:", error);
-                setError('Failed to load blog posts');
+                console.error("Error fetching Medium posts:", error);
+                setError('Failed to load blog posts from Medium');
                 setLoading(false);
-                fallbackData();
+                loadFallbackData();
             }
         };
         
-        const fallbackData = () => {
+        const loadFallbackData = () => {
             const fallbackPosts = [
                 {
                     id: '1',
@@ -46,13 +58,27 @@ const Blog = () => {
             setMediumPosts(fallbackPosts);
         };
 
-        fetchPosts();
+        fetchMediumPosts();
+    }, []);
+
+    // Separate useEffect for window-related operations
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setIsMobile(window.innerWidth < 768);
+            
+            const handleResize = () => {
+                setIsMobile(window.innerWidth < 768);
+            };
+            
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }
     }, []);
 
     if (loading) {
         return (
-            <div className="max-w-4xl mx-auto py-12 text-center">
-                <p className="text-lg">Loading posts from Medium...</p>
+            <div className="loading-container">
+                <p className="loading-text">Loading posts from Medium...</p>
             </div>
         );
     }
@@ -62,56 +88,63 @@ const Blog = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="pb-12"
+            className="blog-container"
         >
             <PageHeader title="Blog" />
-            <div className="max-w-6xl mx-auto px-4">
+            <div className="blog-content-wrapper">
                 {error && (
-                    <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-                        <p className="text-yellow-700">{error} — Showing fallback content.</p>
+                    <div className="error-message">
+                        <p>{error} — Showing fallback content.</p>
                     </div>
                 )}
                 {mediumPosts.length === 0 ? (
-                    <p className="text-center py-8">No posts found.</p>
+                    <p className="no-posts-message">No posts found.</p>
                 ) : (
-                    mediumPosts.map((post) => (
-                        <motion.div
-                            key={post.id}
-                            className="bg-white rounded-lg shadow-lg p-6 mb-8"
-                            whileHover={{ scale: 1.01 }}
-                        >
-                            <h2 className="text-2xl font-bold text-[#2C6B2F] mb-4">{post.title}</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
-                                {/* Image - 40% */}
-                                <div className="md:col-span-2">
-                                    <img 
-                                        src={post.image} 
-                                        alt={post.title}
-                                        className="w-full h-50 object-cover rounded-lg"
-                                    />
-                                </div>
-                                {/* Content - 60% */}
-                                <div className="md:col-span-3 flex flex-col">
-                                    <p className="text-gray-700 mb-4">{post.content}</p>
-                                    <div className="flex flex-wrap items-center pt-4 border-t border-gray-200 text-sm text-gray-600">
-                                        <span>{post.publishedAt}</span>
-                                        <span className="mx-2 text-gray-400">•</span>
-                                        <span>{post.readingTime} min read</span>
-                                        <div className="ml-auto">
-                                            <a 
-                                                href={post.link} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer" 
-                                                className="text-[#4CAF50] hover:text-[#2C6B2F] font-medium transition-colors"
-                                            >
-                                                Read More →
-                                            </a>
+                    <div className="posts-container">
+                        {mediumPosts.map((post) => (
+                            <motion.article
+                                key={post.id}
+                                className="post-card"
+                                whileHover={{ scale: 1.01 }}
+                            >
+                                <h2 className="post-title">{post.title}</h2>
+                                
+                                <div className={`post-content-layout ${isMobile ? 'mobile' : 'desktop'}`}>
+                                    {/* Content column - 60% */}
+                                    <div className="post-content-column">
+                                        <p className="post-content-text">{post.content}</p>
+                                        
+                                        <div className="post-metadata">
+                                            <span>{post.publishedAt}</span>
+                                            <span className="metadata-separator">•</span>
+                                            <span>{post.readingTime} min read</span>
+                                            <div className="read-more-container">
+                                                <a 
+                                                    href={post.link} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className="read-more-link"
+                                                >
+                                                    Read More →
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Image column - 40% */}
+                                    <div className="post-image-column">
+                                        <div className="post-image-container">
+                                            <img 
+                                                src={post.image} 
+                                                alt={post.title}
+                                                className="post-image"
+                                            />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))
+                            </motion.article>
+                        ))}
+                    </div>
                 )}
             </div>
         </motion.div>
