@@ -11,8 +11,7 @@ const Blog = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                // Fetch from your API route instead of directly from RSS2JSON
-                const response = await axios.get('/api/medium-posts');
+                const response = await axios.get('./api/medium-posts');
                 setMediumPosts(response.data);
                 setLoading(false);
             } catch (error) {
@@ -24,13 +23,12 @@ const Blog = () => {
         };
         
         const fallbackData = () => {
-            // Fallback data to display if API fails
             const fallbackPosts = [
                 {
                     id: '1',
                     title: "Getting Started with DevOps",
                     publishedAt: "2024-02-20",
-                    content: "Learn the fundamental principles and practices of DevOps. DevOps is a set of practices that combines software development and IT operations...",
+                    content: "Learn the fundamental principles and practices of DevOps...",
                     readingTime: 5,
                     image: "/api/placeholder/400/300",
                     link: "#"
@@ -39,22 +37,12 @@ const Blog = () => {
                     id: '2',
                     title: "CI/CD Best Practices",
                     publishedAt: "2024-02-15",
-                    content: "Explore the best practices for implementing CI/CD pipelines. Continuous Integration and Continuous Deployment (CI/CD) are essential practices in modern software development...",
+                    content: "Explore the best practices for implementing CI/CD pipelines...",
                     readingTime: 7,
-                    image: "/api/placeholder/400/300",
-                    link: "#"
-                },
-                {
-                    id: '3',
-                    title: "Cloud Architecture Patterns",
-                    publishedAt: "2024-02-10",
-                    content: "Understanding common cloud architecture patterns and their applications. Cloud architecture patterns provide reusable solutions to common problems in cloud computing...",
-                    readingTime: 6,
-                    image: "/api/placeholder/400/300",
+                    image: "./img/gg.png",
                     link: "#"
                 }
             ];
-            
             setMediumPosts(fallbackPosts);
         };
 
@@ -80,12 +68,9 @@ const Blog = () => {
             <div className="max-w-6xl mx-auto px-4">
                 {error && (
                     <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
-                        <p className="text-yellow-700">
-                            {error} — Showing fallback content.
-                        </p>
+                        <p className="text-yellow-700">{error} — Showing fallback content.</p>
                     </div>
                 )}
-                
                 {mediumPosts.length === 0 ? (
                     <p className="text-center py-8">No posts found.</p>
                 ) : (
@@ -95,40 +80,34 @@ const Blog = () => {
                             className="bg-white rounded-lg shadow-lg p-6 mb-8"
                             whileHover={{ scale: 1.01 }}
                         >
-                            {/* Title section */}
                             <h2 className="text-2xl font-bold text-[#2C6B2F] mb-4">{post.title}</h2>
-                            
-                            {/* Content section - 60/40 grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-                                {/* Post content - 60% */}
-                                <div className="md:col-span-3">
-                                    <p className="text-gray-700">{post.content}</p>
-                                </div>
-                                
+                            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
                                 {/* Image - 40% */}
                                 <div className="md:col-span-2">
                                     <img 
                                         src={post.image} 
                                         alt={post.title}
-                                        className="w-full h-48 object-cover rounded-lg"
+                                        className="w-full h-50 object-cover rounded-lg"
                                     />
                                 </div>
-                            </div>
-                            
-                            {/* Meta information */}
-                            <div className="flex flex-wrap items-center mt-4 pt-2 border-t border-gray-100">
-                                <span className="text-gray-600">{post.publishedAt}</span>
-                                <span className="mx-2 text-gray-400">•</span>
-                                <span className="text-gray-600">{post.readingTime} min read</span>
-                                <div className="ml-auto">
-                                    <a 
-                                        href={post.link} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="text-[#4CAF50] hover:text-[#2C6B2F] font-medium transition-colors"
-                                    >
-                                        Read More →
-                                    </a>
+                                {/* Content - 60% */}
+                                <div className="md:col-span-3 flex flex-col">
+                                    <p className="text-gray-700 mb-4">{post.content}</p>
+                                    <div className="flex flex-wrap items-center pt-4 border-t border-gray-200 text-sm text-gray-600">
+                                        <span>{post.publishedAt}</span>
+                                        <span className="mx-2 text-gray-400">•</span>
+                                        <span>{post.readingTime} min read</span>
+                                        <div className="ml-auto">
+                                            <a 
+                                                href={post.link} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="text-[#4CAF50] hover:text-[#2C6B2F] font-medium transition-colors"
+                                            >
+                                                Read More →
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>
