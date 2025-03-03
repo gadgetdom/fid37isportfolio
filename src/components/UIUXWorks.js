@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "react-image-lightbox/style.css";
-import Lightbox from "react-image-lightbox";
-import "../styles/UIUXWorks.css"; 
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import "../styles/UIUXWorks.css";
 
 const UIUXWorks = ({ projects = [] }) => {
     const exampleProjects = [
@@ -33,54 +33,18 @@ const UIUXWorks = ({ projects = [] }) => {
             ],
             prototypeLink: "https://example.com/prototype1",
         },
-        {
-            title: "Safetra Escrow",
-            description:
-                "An Escrow app that connects buyers and sellers, enabling secure transactions without the risk of losing funds or goods online. ",
-            tool: "Figma",
-            images: [
-                "/img/UIXWorks/uiux-1/1.png",
-                "/img/UIXWorks/uiux-1/2.png",
-                "/img/UIXWorks/uiux-1/3.png",
-                "/img/UIXWorks/uiux-1/4.png",
-                "/img/UIXWorks/uiux-1/5.png",
-            ],
-            prototypeLink: "https://example.com/prototype1",
-        },
-        {
-            title: "Safetra Mobile",
-            description:
-                "Update Name to PayEye ",
-            tool: "Figma",
-            images: [
-                "/img/UIXWorks/uiux-2/1.png",
-                "/img/UIXWorks/uiux-2/2.png",
-                "/img/UIXWorks/uiux-2/3.png",
-                "/img/UIXWorks/uiux-2/4.png",
-                "/img/UIXWorks/uiux-2/5.png",
-            ],
-            prototypeLink: "https://example.com/prototype1",
-        },
     ];
 
     const projectsToRender = projects.length > 0 ? projects : exampleProjects;
     const [expandedIndex, setExpandedIndex] = useState(null);
-    const [lightbox, setLightbox] = useState({
-        isOpen: false,
-        projectIndex: 0,
-        imageIndex: 0,
-    });
+    const [lightbox, setLightbox] = useState({ isOpen: false, slides: [] });
 
     const toggleExpand = (index) => {
         setExpandedIndex(expandedIndex === index ? null : index);
     };
 
-    const openLightbox = (projectIndex, imageIndex) => {
-        setLightbox({ isOpen: true, projectIndex, imageIndex });
-    };
-
-    const closeLightbox = () => {
-        setLightbox({ ...lightbox, isOpen: false });
+    const openLightbox = (images) => {
+        setLightbox({ isOpen: true, slides: images.map(src => ({ src })) });
     };
 
     return (
@@ -96,7 +60,7 @@ const UIUXWorks = ({ projects = [] }) => {
                                 src={project.images[0]}
                                 alt={project.title}
                                 className="uiuxworks-image"
-                                onClick={() => openLightbox(index, 0)}
+                                onClick={() => openLightbox(project.images)}
                             />
                         </div>
 
@@ -135,35 +99,9 @@ const UIUXWorks = ({ projects = [] }) => {
 
             {lightbox.isOpen && (
                 <Lightbox
-                    mainSrc={projectsToRender[lightbox.projectIndex].images[lightbox.imageIndex]}
-                    nextSrc={
-                        projectsToRender[lightbox.projectIndex].images[
-                            (lightbox.imageIndex + 1) %
-                                projectsToRender[lightbox.projectIndex].images.length
-                        ]
-                    }
-                    prevSrc={
-                        projectsToRender[lightbox.projectIndex].images[
-                            (lightbox.imageIndex - 1 + projectsToRender[lightbox.projectIndex].images.length) %
-                                projectsToRender[lightbox.projectIndex].images.length
-                        ]
-                    }
-                    onCloseRequest={closeLightbox}
-                    onMovePrevRequest={() =>
-                        setLightbox((prev) => ({
-                            ...prev,
-                            imageIndex:
-                                (prev.imageIndex - 1 + projectsToRender[prev.projectIndex].images.length) %
-                                projectsToRender[prev.projectIndex].images.length,
-                        }))
-                    }
-                    onMoveNextRequest={() =>
-                        setLightbox((prev) => ({
-                            ...prev,
-                            imageIndex:
-                                (prev.imageIndex + 1) % projectsToRender[prev.projectIndex].images.length,
-                        }))
-                    }
+                    open={lightbox.isOpen}
+                    close={() => setLightbox({ isOpen: false, slides: [] })}
+                    slides={lightbox.slides}
                 />
             )}
         </div>
