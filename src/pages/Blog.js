@@ -8,72 +8,70 @@ const Blog = () => {
     const [mediumPosts, setMediumPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isMobile, setIsMobile] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
 
-    // Effect for fetching posts from Medium
-    useEffect(() => {
-        const fetchMediumPosts = async () => {
-            try {
-                const mediumUsername = '@mistarfid'; 
-                const response = await axios.get(
-                    `./api/medium-posts?username=${encodeURIComponent(mediumUsername)}`
-                );
-                
-                if (response.data && Array.isArray(response.data)) {
-                    setMediumPosts(response.data);
-                } else {
-                    throw new Error('Invalid response format');
-                }
-                
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching Medium posts:", error);
-                setError('Failed to load blog posts from Medium');
-                setLoading(false);
-                loadFallbackData();
-            }
-        };
-        
-        const loadFallbackData = () => {
-            const fallbackPosts = [
-                {
-                    id: '1',
-                    title: "Getting Started with DevOps",
-                    publishedAt: "2024-02-20",
-                    content: "Learn the fundamental principles and practices of DevOps...",
-                    readingTime: 5,
-                    image: "/api/placeholder/400/300",
-                    link: "#"
-                },
-                {
-                    id: '2',
-                    title: "CI/CD Best Practices",
-                    publishedAt: "2024-02-15",
-                    content: "Explore the best practices for implementing CI/CD pipelines...",
-                    readingTime: 7,
-                    image: "./img/gg.png",
-                    link: "#"
-                }
-            ];
-            setMediumPosts(fallbackPosts);
-        };
-
-        fetchMediumPosts();
-    }, []);
-
-    // Separate useEffect for window-related operations
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setIsMobile(window.innerWidth < 768);
-            
-            const handleResize = () => {
-                setIsMobile(window.innerWidth < 768);
-            };
-            
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
         }
     }, []);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get(
+                    `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@mistarfid`,
+                    { headers: { 'Cache-Control': 'no-cache' } }
+                );
+
+                if (response.data.status !== 'ok') {
+                    throw new Error('Failed to fetch posts');
+                }
+
+                const processedPosts = response.data.items.map(item => {
+                    const imgRegex = /<img[^>]+src="([^"]+)"/;
+                    const imgMatch = item.content.match(imgRegex);
+                    const imgSrc = imgMatch ? imgMatch[1] : '/api/placeholder/400/300';
+                    const strippedContent = stripHtml(item.content);
+
+                    return {
+                        id: item.guid,
+                        title: item.title,
+                        link: item.link,
+                        publishedAt: new Date(item.pubDate).toLocaleDateString(),
+                        content: strippedContent.length > 200 ? strippedContent.substring(0, 200) + '...' : strippedContent,
+                        readingTime: Math.max(1, Math.round(strippedContent.split(/\s+/).length / 200)),
+                        image: imgSrc,
+                        author: item.author || 'Anonymous',
+                    };
+                });
+
+                setMediumPosts(processedPosts);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching Medium posts:", error);
+                setError('Failed to load blog posts');
+                setLoading(false);
+            }
+        };
+
+        fetchPosts(); // Fetch immediately
+        const interval = setInterval(fetchPosts, 5 * 60 * 1000); // Refresh every 5 minutes
+
+        return () => clearInterval(interval); // Cleanup interval on unmount
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const stripHtml = (html) => {
+        return html.replace(/<[^>]*>/g, '').trim();
+    };
 
     if (loading) {
         return (
@@ -108,12 +106,9 @@ const Blog = () => {
                                 whileHover={{ scale: 1.01 }}
                             >
                                 <h2 className="post-title">{post.title}</h2>
-                                
                                 <div className={`post-content-layout ${isMobile ? 'mobile' : 'desktop'}`}>
-                                    {/* Content column - 60% */}
                                     <div className="post-content-column">
                                         <p className="post-content-text">{post.content}</p>
-                                        
                                         <div className="post-metadata">
                                             <span>{post.publishedAt}</span>
                                             <span className="metadata-separator">•</span>
@@ -130,8 +125,6 @@ const Blog = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    {/* Image column - 40% */}
                                     <div className="post-image-column">
                                         <div className="post-image-container">
                                             <img 

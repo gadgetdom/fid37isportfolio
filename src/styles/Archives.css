@@ -62,3 +62,15 @@
     75% { transform: rotate(-2deg); }
     100% { transform: rotate(0deg); }
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .archive-grid {
+        grid-template-columns: 1fr; /* Single column for mobile */
+    }
+    
+    .archive-image {
+        display: block; /* Ensure images are displayed as block elements on mobile */
+        width: 100%; 
+    }
+}

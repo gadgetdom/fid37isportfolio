@@ -14,25 +14,25 @@ const Archives = () => {
         {
             year: "2023",
             images: [
-                "/img/archive/1.png",
-                "img/gg.png",
-                "img/few1.png",
-                "img/few1.png",
-                "img/few1.png",
-                "img/few1.png",
-                "img/few1.png",
-                "img/few1.png",
-                "img/few1.png",
-                "img/gg.png"
+                "/img/archive/2023/1.png",
+                "/img/archive/2023/2.png",
+                "/img/archive/2023/3.png",
+                "/img/archive/2023/4.png",
+                "/img/archive/2023/5.png",
             ]
         },
         {
             year: "2022",
             images: [
-                "img/few1.png",
-                "img/gg.png",
-                "img/few1.png",
-                "img/gg.png"
+                "/img/archive/2022/a.png",
+                "/img/archive/2022/b.png",
+                "/img/archive/2022/c.png",
+                "/img/archive/2022/d.png",
+                "/img/archive/2022/e.png",
+                "/img/archive/2022/f.png",
+                "/img/archive/2022/g.png",
+                "/img/archive/2022/h.png",
+                "/img/archive/2022/i.png"
             ]
         },
         {
@@ -46,8 +46,9 @@ const Archives = () => {
                 "/img/archive/2021/6.png",
                 "/img/archive/2021/7.png",
                 "/img/archive/2021/8.png",
-                "/img/archive/2021/8.png",
+                "/img/archive/2021/9.png",
                 "/img/archive/2021/10.png",
+                "/img/archive/2021/11.png",
             ]
         }
     ];
