@@ -56,9 +56,13 @@ const Home = () => {
                         <img src={gg} alt="Descriptive Alt" />
                     </div>
                 )}
-                <div className={`text-column ${hovered ? 'shifted' : ''} max-w-2xl` }>
+                <div className={`text-column ${hovered ? 'shifted' : ''} max-w-2xl`}>
                     <p>
-                        I am a versatile professional with expertise in computer troubleshooting, UX research, UI/UX design, and frontend development (HTML, CSS, JavaScript). Skilled in software QA (manual & automated) and ensuring top-notch functionality. Experienced in graphic design, product management, and Scrum Master roles, offering a holistic product lifecycle understanding. Currently exploring DevOps to enhance full-stack capabilities. Passionate about creating innovative, user-centered tech solutions.
+                        With over four years of experience as a Software Tester, I specialize in manual and automated QA, ensuring top-notch functionality. My skills span computer troubleshooting, UX research, UI/UX design, and frontend development (HTML, CSS, JavaScript), with additional expertise in graphic design, product management, and Scrum Master roles.
+                    </p>
+                    <p>
+                        Currently exploring DevOps to enhance my full-stack capabilities, I’m passionate about creating user-centered tech solutions. My holistic understanding of the product lifecycle helps me bridge gaps between development, design, and business needs, ensuring high-quality software products.
+                        
                     </p>
                 </div>
             </section>
@@ -94,8 +98,8 @@ const Home = () => {
                 </div>
             </section>
             <section className="certifications-section">
-            <h1>Certifications</h1>
-            <h4>Showcasing the Pinnacle of Achievement: My Badge of Expertise and Certifications</h4>
+                <h1>Certifications</h1>
+                <h4>Showcasing the Pinnacle of Achievement: My Badge of Expertise and Certifications</h4>
                 <CertificationSec />
             </section>
         </motion.div>

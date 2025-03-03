@@ -11,10 +11,11 @@ const FrontendWorks = () => {
             tech: "Html, CSS, React, JavaScript",
             link: "https://baobabpartners.netlify.app/",
             images: [
-                "img/few1.png",
-                "img/gg.png",
-                "img/few1.png",
-                "img/gg.png"
+                "/img/FEworks/Baobab/1.png",
+                "/img/FEworks/Baobab/2.png",
+                "/img/FEworks/Baobab/3.png",
+                "/img/FEworks/Baobab/4.png"
+
             ]
         }, 
         {
@@ -23,9 +24,7 @@ const FrontendWorks = () => {
             tech: "Html, CSS, React, JavaScript",
             link: "https://phylsgadgets.netlify.app/",
             images: [
-                "img/few1.png",
-                "img/gg.png",
-                "img/few1.png"
+                "/img/FEworks/Pgadgets/1.png",
             ]
         }
     ];

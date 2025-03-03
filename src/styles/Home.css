@@ -35,7 +35,7 @@ h1 {
 /* Desktop layout */
 .text-column {
     transition: transform 0.3s ease-in-out;
-    text-align: center;
+    text-align: justify;
     max-width: 600px;
     line-height: 30px;
 }

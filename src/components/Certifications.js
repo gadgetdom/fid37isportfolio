@@ -22,13 +22,6 @@ const CertificationSec = () => {
             certificateUrl: promgmtCert
         },
         {
-            id: 3,
-            title: "Azure Developer Associate",
-            issuer: "Will be added soon",
-            date: "2012",
-            certificateUrl: udemyCert
-        },
-        {
             id: 4,
             title: "Software Testing",
             issuer: "Udemy",
