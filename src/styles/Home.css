@@ -69,23 +69,12 @@ h1 {
     gap: 20px;
     justify-content: center;
     padding: 50px 0;
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
 }
 
-.skill-box {
-    position: relative;
-    background: #f4f4f4;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.skill-box:hover .skill-banner {
-    visibility: visible;
-    opacity: 1;
+.skill-box span  {
+    padding: 10px;
 }
 
 /* Responsive Design for Mobile */
@@ -116,17 +105,71 @@ h1 {
     }
 }
 
+@media (max-width: 1024px) {
+    .first-section {
+        display: block;
+        text-align: center;
+        height: auto;
+        padding: 20px;
+    }
 
-/* Styling for sections */
-.skills-section,
-.certifications-section {
-    text-align: center;
-    padding: 50px 0;
-    width: 100%;
+    .image-column {
+        position: relative;
+        width: 80%;
+        max-width: 300px;
+        margin: 0 auto 20px;
+    }
+
+    .text-column {
+        max-width: 90%;
+        margin: 0 auto;
+        text-align: justify;
+    }
+
+    .text-column.shifted {
+        transform: translateX(0);
+    }
 }
 
-.skill-box {
-    animation: move 5s infinite;
+
+.skills-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skills-row {
+    display: flex;
+    gap: 20px;
+    white-space: nowrap;
+    width: max-content;
+}
+
+.skills-row.left {
+    animation: move-left 40s linear infinite;
+}
+
+.skills-row.right {
+    animation: move-right 40s linear infinite;
+}
+
+@keyframes move-left {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes move-right {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }
 
 .services-section {

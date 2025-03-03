@@ -12,14 +12,14 @@ const CertificationSec = () => {
             title: "Product Management",
             issuer: "DevCareer X UK-Nigeria Tech Hub",
             date: "2024",
-            certificateUrl: prmgmCert
+            certificateUrl: promgmtCert
         },
         {
             id: 2,
             title: "Product Management 2",
             issuer: "Great Learning",
             date: "2023",
-            certificateUrl: promgmtCert
+            certificateUrl: prmgmCert
         },
         {
             id: 4,

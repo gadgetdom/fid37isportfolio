@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import '../styles/Home.css';
 import gg from '../assets/gg.png';
 import PageHeader from '../components/PageHeader';
@@ -7,14 +7,12 @@ import CertificationSec from '../components/Certifications';
 
 const Home = () => {
     const [hovered, setHovered] = useState(false);
-    const [randomSkills, setRandomSkills] = useState([]);
     const [bgImage, setBgImage] = useState('');
 
     const skills = useMemo(() => [
         'Devops', 'Scripting', 'Product Mgmt', 'Testing', 'Scrum Master',
-        'JavaScript', 'Git', 'Figma', 'HTML/CSS', 'ICT Support'
+        'JavaScript', 'Git', 'Figma', 'HTML/CSS', 'ICT Support', 'Automation', 'JIRA', 'Monday.com'
     ], []);
-
     const services = [
         { name: 'IT Support Consulting', description: 'Providing expert IT support and consulting services.' },
         { name: 'Web Application Design', description: 'Designing user-friendly and responsive web applications.' },
@@ -25,12 +23,6 @@ const Home = () => {
         { name: 'Product Management', description: 'Expertise in product management and agile methodologies.' }
     ];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setRandomSkills(skills.sort(() => Math.random() - 0.5));
-        }, 2000);
-        return () => clearInterval(interval);
-    }, [skills]);
 
     const handleMouseEnter = () => {
         const bgImages = ['url(/path/to/abstract1.jpg)', 'url(/path/to/abstract2.jpg)', 'url(/path/to/abstract3.jpg)'];
@@ -44,7 +36,7 @@ const Home = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="home-container mx-auto text-center w-full px-4 sm:px-6 md:max-w-4xl"
->
+        >
             <PageHeader title="About Me" />
             <section
                 className="first-section flex flex-col items-center"
@@ -62,23 +54,130 @@ const Home = () => {
                     </p>
                     <p>
                         Currently exploring DevOps to enhance my full-stack capabilities, I’m passionate about creating user-centered tech solutions. My holistic understanding of the product lifecycle helps me bridge gaps between development, design, and business needs, ensuring high-quality software products.
-                        
+
                     </p>
                 </div>
             </section>
 
             {/* Second Section - Skills */}
             <section className="skills-section">
-                <h1>Skills</h1>
-                <h5>My Range of Skills and Competencies</h5>
-                <div className="skills-container">
-                    {randomSkills.map((skill, index) => (
-                        <div key={index} className="skill-box" style={{ animation: `move ${Math.random() * 5 + 3}s infinite` }}>
-                            <span>{skill}</span>
-                        </div>
-                    ))}
+    <h1>Skills</h1>
+    <h5>My Range of Skills and Competencies</h5>
+    <div className="skills-container">
+        {[0, 1, 2].map((rowIndex) => {
+            // Get skills for this row
+            const rowSkills = skills.slice(
+                (rowIndex * Math.ceil(skills.length / 3)),
+                ((rowIndex + 1) * Math.ceil(skills.length / 3))
+            );
+            
+            // Ensure we have enough items to fill the screen
+            const displaySkills = [...rowSkills, ...rowSkills, ...rowSkills, ...rowSkills];
+            
+            // Determine direction based on row index
+            const isEvenRow = rowIndex % 2 === 0;
+            
+            // Adjust duration - faster for better experience
+            // Middle row slightly faster to prevent clustering
+            const duration = rowIndex === 1 ? 15 : 18;
+            
+            return (
+                <div 
+                    key={rowIndex} 
+                    className="skills-row-wrapper" 
+                    style={{ 
+                        overflow: 'hidden',
+                        position: 'relative',
+                        width: '100%',
+                        marginBottom: '20px'
+                    }}
+                >
+                    {/* We need two identical rows for the seamless effect */}
+                    <div style={{ 
+                        display: 'flex',
+                        width: '200%',
+                        position: 'relative'
+                    }}>
+                        {/* First copy of skills */}
+                        <motion.div
+                            className="skills-row"
+                            style={{
+                                display: 'flex',
+                                width: '100%'
+                            }}
+                            initial={{ x: isEvenRow ? '0%' : '-100%' }}
+                            animate={{ x: isEvenRow ? '-100%' : '0%' }}
+                            transition={{
+                                ease: "linear",
+                                duration: duration,
+                                repeat: Infinity,
+                                repeatType: "loop"
+                            }}
+                        >
+                            {displaySkills.map((skill, index) => (
+                                <div 
+                                    key={`${rowIndex}-a-${index}`} 
+                                    className="skill-box"
+                                    style={{
+                                        padding: '8px 16px',
+                                        margin: '0 8px',
+                                        background: '#f0f0f0',
+                                        borderRadius: '4px',
+                                        whiteSpace: 'nowrap',
+                                        // Fixed width instead of flex to prevent clustering on mobile
+                                        minWidth: '120px',
+                                        textAlign: 'center'
+                                    }}
+                                >
+                                    <span>{skill || `Skill ${rowIndex * 10 + index + 1}`}</span>
+                                </div>
+                            ))}
+                        </motion.div>
+                        
+                        {/* Second copy of skills (identical) - creates the infinite loop effect */}
+                        <motion.div
+                            className="skills-row"
+                            style={{
+                                display: 'flex',
+                                width: '100%',
+                                position: 'absolute',
+                                left: isEvenRow ? '100%' : '-100%'
+                            }}
+                            initial={{ x: isEvenRow ? '0%' : '-100%' }}
+                            animate={{ x: isEvenRow ? '-100%' : '0%' }}
+                            transition={{
+                                ease: "linear",
+                                duration: duration,
+                                repeat: Infinity,
+                                repeatType: "loop"
+                            }}
+                        >
+                            {displaySkills.map((skill, index) => (
+                                <div 
+                                    key={`${rowIndex}-b-${index}`} 
+                                    className="skill-box"
+                                    style={{
+                                        padding: '8px 16px',
+                                        margin: '0 8px',
+                                        background: '#f0f0f0',
+                                        borderRadius: '4px',
+                                        whiteSpace: 'nowrap',
+                                        // Fixed width instead of flex to prevent clustering on mobile
+                                        minWidth: '120px',
+                                        textAlign: 'center'
+                                    }}
+                                >
+                                    <span>{skill || `Skill ${rowIndex * 10 + index + 1}`}</span>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
                 </div>
-            </section>
+            );
+        })}
+    </div>
+</section>
+
 
             {/* New Section - Services */}
             <section
