@@ -1,21 +1,43 @@
 import React, { useState } from "react";
+import "react-image-lightbox/style.css";
+import Lightbox from "react-image-lightbox";
 import "../styles/UIUXWorks.css"; 
 
 const UIUXWorks = ({ projects = [] }) => {
     const exampleProjects = [
         {
-            title: "Project One",
+            title: "Mystic Bulk SMS Web App",
             description:
-                "This is a long description for project one. It contains detailed information about the design process, decisions made, and the overall impact. This will be truncated if too long.",
+                "I designed a web application for a client who needed a platform where users could purchase SMS units and send bulk messages for their businesses or events. The project was successfully delivered, and the client was highly satisfied with the outcome.",
             tool: "Figma",
-            images: ["img/few1.png", "img/gg.png", "img/few1.png", "img/gg.png"],
+            images: [
+                "/img/UIXWorks/myst/1.png",
+                "/img/UIXWorks/myst/2.png",
+                "/img/UIXWorks/myst/3.png",
+                "/img/UIXWorks/myst/4.png",
+                "/img/UIXWorks/myst/5.png",
+            ],
+            prototypeLink: "https://example.com/prototype1",
+        },
+        {
+            title: "Hirelez Web Application",
+            description:
+                "I conducted UX research and designed a platform that allows users to seamlessly connect with skilled workers in their area, negotiate prices, agree on terms, make payments, and rate the worker upon job completion. The client was thrilled with the results and highly satisfied with the final product.",
+            tool: "Figma",
+            images: [
+                "/img/UIXWorks/hirz/1.png",
+                "/img/UIXWorks/hirz/2.png",
+                "/img/UIXWorks/hirz/3.png",
+                "/img/UIXWorks/hirz/4.png",
+                "/img/UIXWorks/hirz/5.png",
+            ],
             prototypeLink: "https://example.com/prototype1",
         },
     ];
 
     const projectsToRender = projects.length > 0 ? projects : exampleProjects;
     const [expandedIndex, setExpandedIndex] = useState(null);
-    const [imagePreview, setImagePreview] = useState({
+    const [lightbox, setLightbox] = useState({
         isOpen: false,
         projectIndex: 0,
         imageIndex: 0,
@@ -25,114 +47,98 @@ const UIUXWorks = ({ projects = [] }) => {
         setExpandedIndex(expandedIndex === index ? null : index);
     };
 
-    const openImagePreview = (projectIndex) => {
-        setImagePreview({ isOpen: true, projectIndex, imageIndex: 0 });
+    const openLightbox = (projectIndex, imageIndex) => {
+        setLightbox({ isOpen: true, projectIndex, imageIndex });
     };
 
-    const closeImagePreview = () => {
-        setImagePreview({ ...imagePreview, isOpen: false });
-    };
-
-    const handleNextImage = () => {
-        setImagePreview((prev) => ({
-            ...prev,
-            imageIndex:
-                (prev.imageIndex + 1) %
-                projectsToRender[prev.projectIndex].images.length,
-        }));
-    };
-
-    const handlePrevImage = () => {
-        setImagePreview((prev) => ({
-            ...prev,
-            imageIndex:
-                (prev.imageIndex - 1 +
-                    projectsToRender[prev.projectIndex].images.length) %
-                projectsToRender[prev.projectIndex].images.length,
-        }));
+    const closeLightbox = () => {
+        setLightbox({ ...lightbox, isOpen: false });
     };
 
     return (
-        <>
-            <div className="uiuxworks-container">
-                {projectsToRender.map((project, index) => {
-                    const isExpanded = expandedIndex === index;
-                    const truncatedDescription = project.description.slice(0, 100);
-                    return (
-                        <div className="uiuxworks-card" key={index}>
-                            {/* Image Preview Container */}
-                            <div className="uiuxworks-image-container">
-                                <img
-                                    src={project.images[0]}
-                                    alt={project.title}
-                                    className="uiuxworks-image"
-                                    onClick={() => openImagePreview(index)}
-                                />
-                                <span className="image-count">{project.images.length} Images</span>
-                            </div>
-
-                            {/* Details Section */}
-                            <div className="uiuxworks-overlay" onClick={(e) => e.stopPropagation()}>
-                                <div className="uiuxworks-info">
-                                    {/* Left Column: Title & Description */}
-                                    <div className="uiuxworks-text">
-                                        <h3>{project.title}</h3>
-                                        <p>
-                                            {isExpanded
-                                                ? project.description
-                                                : `${truncatedDescription}...`}
-                                        </p>
-                                        <button
-                                            className="uiuxworks-view-more"
-                                            onClick={() => toggleExpand(index)}
-                                        >
-                                            {isExpanded ? "View Less" : "View More"}
-                                        </button>
-                                    </div>
-
-                                    {/* Right Column: Tool & Button */}
-                                    <div className="uiuxworks-actions">
-                                        <span className="uiuxworks-tool">Tool: {project.tool}</span>
-                                        <a
-                                            href={project.prototypeLink}
-                                            className="uiuxworks-button"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            View Prototype
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Inline Image Preview */}
-                            {imagePreview.isOpen && imagePreview.projectIndex === index && (
-                                <div className="inline-preview">
-                                    <button className="inline-preview-close" onClick={closeImagePreview}>
-                                        ✕
-                                    </button>
-                                    <button className="inline-preview-nav left" onClick={handlePrevImage}>
-                                        ◀
-                                    </button>
-                                    <img
-                                        src={
-                                            projectsToRender[imagePreview.projectIndex].images[
-                                            imagePreview.imageIndex
-                                            ]
-                                        }
-                                        alt="Project preview"
-                                        className="inline-preview-image"
-                                    />
-                                    <button className="inline-preview-nav right" onClick={handleNextImage}>
-                                        ▶
-                                    </button>
-                                </div>
-                            )}
+        <div className="uiuxworks-container">
+            {projectsToRender.map((project, index) => {
+                const isExpanded = expandedIndex === index;
+                const truncatedDescription = project.description.slice(0, 100);
+                return (
+                    <div className="uiuxworks-card" key={index}>
+                        <div className="uiuxworks-image-wrapper">
+                            <div className="image-count-badge">{project.images.length} Images</div>
+                            <img
+                                src={project.images[0]}
+                                alt={project.title}
+                                className="uiuxworks-image"
+                                onClick={() => openLightbox(index, 0)}
+                            />
                         </div>
-                    );
-                })}
-            </div>
-        </>
+
+                        <div className="uiuxworks-details">
+                            <h3 className="project-title">{project.title}</h3>
+                            
+                            <div className="project-description">
+                                <p>
+                                    {isExpanded
+                                        ? project.description
+                                        : `${truncatedDescription}...`}
+                                </p>
+                                <button
+                                    className="view-more-btn"
+                                    onClick={() => toggleExpand(index)}
+                                >
+                                    {isExpanded ? "View Less" : "View More"}
+                                </button>
+                            </div>
+                            
+                            <div className="project-footer">
+                                <span className="tool-badge">Tool: {project.tool}</span>
+                                <a
+                                    href={project.prototypeLink}
+                                    className="prototype-btn"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View Prototype
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+
+            {lightbox.isOpen && (
+                <Lightbox
+                    mainSrc={projectsToRender[lightbox.projectIndex].images[lightbox.imageIndex]}
+                    nextSrc={
+                        projectsToRender[lightbox.projectIndex].images[
+                            (lightbox.imageIndex + 1) %
+                                projectsToRender[lightbox.projectIndex].images.length
+                        ]
+                    }
+                    prevSrc={
+                        projectsToRender[lightbox.projectIndex].images[
+                            (lightbox.imageIndex - 1 + projectsToRender[lightbox.projectIndex].images.length) %
+                                projectsToRender[lightbox.projectIndex].images.length
+                        ]
+                    }
+                    onCloseRequest={closeLightbox}
+                    onMovePrevRequest={() =>
+                        setLightbox((prev) => ({
+                            ...prev,
+                            imageIndex:
+                                (prev.imageIndex - 1 + projectsToRender[prev.projectIndex].images.length) %
+                                projectsToRender[prev.projectIndex].images.length,
+                        }))
+                    }
+                    onMoveNextRequest={() =>
+                        setLightbox((prev) => ({
+                            ...prev,
+                            imageIndex:
+                                (prev.imageIndex + 1) % projectsToRender[prev.projectIndex].images.length,
+                        }))
+                    }
+                />
+            )}
+        </div>
     );
 };
 

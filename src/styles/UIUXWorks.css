@@ -1,178 +1,259 @@
 /* UIUXWorks.css */
 .uiuxworks-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-top: -42px;
+    gap: 2rem;
+    width: 100%;
+    padding: 1rem;
+    margin-top: -40px;
 }
 
 .uiuxworks-card {
-    position: relative;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    height: 40%;
     overflow: hidden;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 15px;
 }
 
-.uiuxworks-image-container {
+.uiuxworks-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Image section styling */
+.uiuxworks-image-wrapper {
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 60%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
 }
 
 .uiuxworks-image {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: transform 0.5s ease;
     cursor: pointer;
+    display: block;
+    /* Ensures the image is always visible */
 }
 
-.image-count {
+.uiuxworks-image:hover {
+    transform: scale(1.05);
+}
+
+.image-count-badge {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 0.75rem;
     padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
+    border-radius: 12px;
+    z-index: 2;
 }
 
-.uiuxworks-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 14px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.uiuxworks-info {
-    display: grid;
-    grid-template-columns: 70% 30%;
-    gap: 10px;
-    width: 100%;
-    text-align: left;
-}
-
-.uiuxworks-text {
-    flex: 1;
-    padding-right: 10px;
-    padding-right: 10px;
-}
-
-.uiuxworks-actions {
+/* Details section styling */
+.uiuxworks-details {
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    padding: 40px;
+    gap: 0.75rem;
+    flex: 1;
 }
 
-.uiuxworks-actions a {
-    background: #ffff;
+.project-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: #333;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 15px;
-    transition: background 0.3s ease-in-out;
 }
 
-.uiuxworks-view-more {
+.project-description {
+    margin-bottom: 1rem;
+}
+
+.project-description p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.view-more-btn {
     background: none;
     border: none;
-    color: #fff;
-    font-weight: 600;
+    color: #3498db;
+    font-size: 0.875rem;
     cursor: pointer;
-    font-size: 14px;
     padding: 0;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.view-more-btn:hover {
     text-decoration: underline;
 }
 
-.inline-preview {
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.tool-badge {
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.prototype-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.prototype-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Image Preview Modal */
+.image-preview-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.inline-preview-image {
-    max-width: 90%;
-    max-height: 80%;
+.image-preview-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.inline-preview-close {
+.preview-image-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.close-preview-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
+    top: -40px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     border: none;
-    color: #fff;
-    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.inline-preview-nav {
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.inline-preview-nav.left {
-    left: 20px;
+.prev-btn {
+    left: -50px;
 }
 
-.inline-preview-nav.right {
-    right: 20px;
+.next-btn {
+    right: -50px;
 }
 
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .uiuxworks-card {
-        display: flex;
+    .uiuxworks-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 0.75rem;
+    }
+
+    .uiuxworks-details {
+        padding: 1rem;
+    }
+
+    .nav-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .uiuxworks-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 0.5rem;
+    }
+
+    .project-footer {
         flex-direction: column;
-        width: 100%;
+        align-items: flex-start;
+        gap: 0.75rem;
     }
 
-    .uiuxworks-info {
-        padding: 16px;
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        order: 1;
+    .prototype-btn {
         width: 100%;
-        box-sizing: border-box;
+        text-align: center;
     }
 
-    .uiuxworks-image-container {
-        order: 2;
-        width: 100%;
-        padding-bottom: 56.25%; /* Adjusted aspect ratio for mobile view */
-    }
-
-    .uiuxworks-overlay {
-        order: 1;
-        width: 100%;
+    .image-preview-container {
+        width: 95%;
     }
 }
