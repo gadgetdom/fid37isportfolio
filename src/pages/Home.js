@@ -43,8 +43,8 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="home-container mx-auto text-center max-w-4xl"
-        >
+            className="home-container mx-auto text-center w-full px-4 sm:px-6 md:max-w-4xl"
+>
             <PageHeader title="About Me" />
             <section
                 className="first-section flex flex-col items-center"

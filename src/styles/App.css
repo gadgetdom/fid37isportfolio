@@ -26,7 +26,7 @@ body {
 .content-container {  
   max-width: 1200px;   
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
 } 
 
 .icon-container {
@@ -75,7 +75,8 @@ p, li, span, a {
 /* Responsive page container */
 @media (max-width: 768px) {
   .page-container {
-    padding: 1rem;
+    padding: 3px;
+    max-width: 400px;
   }
 }
 
@@ -90,13 +91,6 @@ p, li, span, a {
   margin: 0 auto;
 }
 
-/* Responsive grid container */
-@media (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: 1fr;
-  }
-}
-
 .grid-container {  
   display: grid;  
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -108,13 +102,6 @@ p, li, span, a {
   margin: 0 auto;  
 }  
 
-/* Responsive adjustments for different screen sizes */  
-@media (max-width: 768px) {  
-  .grid-container {  
-      grid-template-columns: repeat(2, 1fr);
-  }  
-}  
-
 @media (max-width: 480px) {  
   .grid-container {  
       grid-template-columns: 1fr;
@@ -124,16 +111,18 @@ p, li, span, a {
 .card-container {  
   perspective: 1000px; 
   width: 100%; 
-  max-width: 300px;
+  max-width: 400px;
   height: 250px;  
 }  
 
 .card {  
-  width: 100%; 
+  width: 95%; 
+  margin: 0 auto;
   height: 100%;  
   transition: transform 0.6s;  
   transform-style: preserve-3d;  
-  position: relative; 
+  position: relative;
+  border: 1px solid #ccc;
 }  
 
 .card.flip {  

@@ -92,9 +92,12 @@ h1 {
 @media (max-width: 768px) {
     .first-section {
         flex-direction: column;
-        max-width: 300px;
+        max-width: 400px;
         height: auto;
-        text-align: center;
+        text-align: justify;
+    }
+    .home-container {
+        max-width: 100vw; 
     }
 
     .image-column {
@@ -113,30 +116,6 @@ h1 {
     }
 }
 
-/* Responsive Design for Tablets (width ≤ 1024px) */
-@media (max-width: 884px) {
-    .first-section {
-        flex-direction: column;
-        height: auto;
-        text-align: center;
-    }
-
-    .image-column {
-        position: relative;
-        width: 50%;
-        max-width: 200px;
-        margin-bottom: 20px;
-    }
-
-    .text-column {
-        text-align: center;
-        max-width: 80%;
-    }
-
-    .text-column.shifted {
-        transform: translateX(0);
-    }
-}
 
 /* Styling for sections */
 .skills-section,
@@ -144,28 +123,6 @@ h1 {
     text-align: center;
     padding: 50px 0;
     width: 100%;
-}
-
-@keyframes move {
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(50px, -50px);
-    }
-
-    50% {
-        transform: translate(-50px, -50px);
-    }
-
-    75% {
-        transform: translate(-50px, 50px);
-    }
-
-    100% {
-        transform: translate(0, 0);
-    }
 }
 
 .skill-box {
@@ -267,6 +224,11 @@ h1 {
     .service-card:hover {
         background-color: #4caf50;
         color: white;
+    }
+    .text-column {
+        text-align: center;
+        max-width: 90%;
+        text-align: justify;
     }
 }
 
