@@ -33,6 +33,34 @@ const UIUXWorks = ({ projects = [] }) => {
             ],
             prototypeLink: "https://example.com/prototype1",
         },
+        {
+            title: "Safetra Escrow",
+            description:
+                "An Escrow app that connects buyers and sellers, enabling secure transactions without the risk of losing funds or goods online. ",
+            tool: "Figma",
+            images: [
+                "/img/UIXWorks/uiux-1/1.png",
+                "/img/UIXWorks/uiux-1/2.png",
+                "/img/UIXWorks/uiux-1/3.png",
+                "/img/UIXWorks/uiux-1/4.png",
+                "/img/UIXWorks/uiux-1/5.png",
+            ],
+            prototypeLink: "https://example.com/prototype1",
+        },
+        {
+            title: "Safetra Mobile",
+            description:
+                "Update Name to PayEye ",
+            tool: "Figma",
+            images: [
+                "/img/UIXWorks/uiux-2/1.png",
+                "/img/UIXWorks/uiux-2/2.png",
+                "/img/UIXWorks/uiux-2/3.png",
+                "/img/UIXWorks/uiux-2/4.png",
+                "/img/UIXWorks/uiux-2/5.png",
+            ],
+            prototypeLink: "https://example.com/prototype1",
+        },
     ];
 
     const projectsToRender = projects.length > 0 ? projects : exampleProjects;
