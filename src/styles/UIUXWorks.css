@@ -87,7 +87,7 @@
 .view-more-btn {
     background: none;
     border: none;
-    color: #3498db;
+    color: #2C6B2F;
     font-size: 0.875rem;
     cursor: pointer;
     padding: 0;
@@ -115,7 +115,7 @@
 }
 
 .prototype-btn {
-    background-color: #4bc050;
+    background-color: #4caf50;
     color: white;
     padding: 8px 15px;
     border-radius: 2px;

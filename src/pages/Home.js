@@ -4,6 +4,7 @@ import gg from '../assets/gg.png';
 import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
 import CertificationSec from '../components/Certifications';
+import ContactSection from '../components/ContactSection';
 
 const Home = () => {
     const [hovered, setHovered] = useState(false);
@@ -70,15 +71,8 @@ const Home = () => {
                 (rowIndex * Math.ceil(skills.length / 3)),
                 ((rowIndex + 1) * Math.ceil(skills.length / 3))
             );
-            
-            // Ensure we have enough items to fill the screen
             const displaySkills = [...rowSkills, ...rowSkills, ...rowSkills, ...rowSkills];
-            
-            // Determine direction based on row index
             const isEvenRow = rowIndex % 2 === 0;
-            
-            // Adjust duration - faster for better experience
-            // Middle row slightly faster to prevent clustering
             const duration = rowIndex === 1 ? 15 : 18;
             
             return (
@@ -201,6 +195,9 @@ const Home = () => {
                 <h4>Showcasing the Pinnacle of Achievement: My Badge of Expertise and Certifications</h4>
                 <CertificationSec />
             </section>
+
+             {/* New Contact Section */}
+             <ContactSection />
         </motion.div>
     );
 };
