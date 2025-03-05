@@ -1,8 +1,8 @@
 /* General container styling */
 .devops-container {
     display: flex;
-    max-width: 1280px;
-    margin: -3% auto;
+    max-width: 1200px;
+    margin: 0 auto;
     min-height: 100vh;
     padding: 1rem;
 }
@@ -10,7 +10,7 @@
 /* Project card */
 .devops-card {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 2px;
     padding: 1.5rem;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
