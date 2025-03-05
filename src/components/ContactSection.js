@@ -1,108 +1,107 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import emailjs from 'emailjs-com';
 import '../styles/ContactSection.css';
 import Notification from './Notification';
 
+// Initial state for the form
+const initialState = {
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    messageTitle: '',
+    messageBody: ''
+};
+
+// Reducer function to manage form state
+const formReducer = (state, action) => {
+    switch (action.type) {
+        case 'UPDATE_FIELD':
+            return { ...state, [action.field]: action.value };
+        case 'RESET_FORM':
+            return initialState;
+        default:
+            return state;
+    }
+};
+
 const ContactSection = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        messageTitle: '',
-        messageBody: ''
-    });
-
+    const [formData, dispatch] = useReducer(formReducer, initialState);
     const [notification, setNotification] = useState(null);
+    const [loading, setLoading] = useState(false);
 
+    // Handles input change and updates state
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        dispatch({ type: 'UPDATE_FIELD', field: e.target.name, value: e.target.value });
     };
 
+    // Check if required fields are filled
     const isFormValid = () => {
         const requiredFields = ['name', 'email', 'messageTitle', 'messageBody'];
         return requiredFields.every(field => formData[field].trim() !== '');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate form
         if (!isFormValid()) {
-            setNotification({
-                message: 'Please fill in all required fields.',
-                type: 'error'
-            });
+            setNotification({ message: 'Please fill in all required fields.', type: 'error' });
             return;
         }
 
-        // Replace these with your actual EmailJS credentials
+        setLoading(true);
+
         const SERVICE_ID = 'service_mg74hrj';
         const TEMPLATE_ID = 'template_k7j82vo';
-        const USER_ID = 'YOUR_EMAILJS_USER_ID';
+        const USER_ID = 'xOsdfU1dwZUO7GBBw';
 
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, USER_ID)
-            .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
-                
-                // Show success notification
-                setNotification({
-                    message: 'Message sent successfully!',
-                    type: 'success'
-                });
+        // Ensure all form data is passed correctly to EmailJS
+        const templateParams = {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || 'N/A', // Handle optional fields
+            company: formData.company || 'N/A',
+            messageTitle: formData.messageTitle,
+            messageBody: formData.messageBody
+        };
 
-                // Reset form after successful submission
-                setFormData({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    company: '',
-                    messageTitle: '',
-                    messageBody: ''
-                });
-            }, (err) => {
-                console.log('FAILED...', err);
-                
-                // Show error notification
-                setNotification({
-                    message: 'Failed to send message. Please try again.',
-                    type: 'error'
-                });
-            });
+        console.log("Sending data to EmailJS:", templateParams); // Debugging log
+
+        try {
+            const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID);
+            console.log('SUCCESS!', response.status, response.text);
+
+            setNotification({ message: 'Message sent successfully!', type: 'success' });
+            dispatch({ type: 'RESET_FORM' }); // Reset form fields
+        } catch (err) {
+            console.error('FAILED...', err);
+            setNotification({ message: 'Failed to send message. Please try again.', type: 'error' });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <section className="contact-section">
-            {/* Notification component */}
-            {notification && (
-                <Notification 
-                    message={notification.message} 
-                    type={notification.type}
-                    onClose={() => setNotification(null)}
-                />
-            )}
+            {notification && <Notification message={notification.message} type={notification.type} onClose={() => setNotification(null)} />}
 
             <div className="contact-info">
                 <h1>Contact Information</h1>
                 <div className="contact-details">
                     <div>
                         <h3>Emails</h3>
-                        <p>Professional: your.professional.email@example.com</p>
-                        <p>Personal: your.personal.email@example.com</p>
+                        <p>Professional: agbaphydelis@outlook.com</p>
+                        <p>Personal: phyd3lis@gmail.com</p>
                     </div>
                     <div>
                         <h3>Phone Numbers</h3>
-                        <p>Mobile: +1 (123) 456-7890</p>
-                        <p>Work: +1 (987) 654-3210</p>
+                        <p>Mobile: +234 (808) 595-2266</p>
+                        <p>Work: +234 (703) 826-4911</p>
                     </div>
                     <div>
-                        <h3>Current Location</h3>
-                        <p>City, State, Country</p>
-                        <p>Zip/Postal Code</p>
+                        <h3>Address:</h3>
+                        <p>Asaba, Delta State, Nigeria</p>
+                        <p>320102</p>
                     </div>
                 </div>
             </div>
@@ -111,60 +110,17 @@ const ContactSection = () => {
                 <h1>Send Me a Message</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="grid">
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Your Name *"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Your Email *"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
+                        <input type="text" name="name" placeholder="Your Name *" value={formData.name} onChange={handleChange} required />
+                        <input type="email" name="email" placeholder="Your Email *" value={formData.email} onChange={handleChange} required />
                     </div>
                     <div className="grid">
-                        <input
-                            type="tel"
-                            name="phone"
-                            placeholder="Phone Number"
-                            value={formData.phone}
-                            onChange={handleChange}
-                        />
-                        <input
-                            type="text"
-                            name="company"
-                            placeholder="Company Name"
-                            value={formData.company}
-                            onChange={handleChange}
-                        />
+                        <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} />
+                        <input type="text" name="company" placeholder="Company Name" value={formData.company} onChange={handleChange} />
                     </div>
-                    <input
-                        type="text"
-                        name="messageTitle"
-                        placeholder="Message Title *"
-                        value={formData.messageTitle}
-                        onChange={handleChange}
-                        required
-                    />
-                    <textarea
-                        name="messageBody"
-                        placeholder="Your Message *"
-                        value={formData.messageBody}
-                        onChange={handleChange}
-                        required
-                    />
-                    <button 
-                        type="submit" 
-                        disabled={!isFormValid()}
-                        className={!isFormValid() ? 'disabled' : ''}
-                    >
-                        Send Message
+                    <input type="text" name="messageTitle" placeholder="Message Subject" value={formData.messageTitle} onChange={handleChange} required />
+                    <textarea name="messageBody" placeholder="Your Message *" value={formData.messageBody} onChange={handleChange} required />
+                    <button type="submit" disabled={!isFormValid() || loading} className={!isFormValid() ? 'disabled' : ''}>
+                        {loading ? <span className="spinner"></span> : 'Send Message'}
                     </button>
                 </form>
             </div>
