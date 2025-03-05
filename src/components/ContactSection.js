@@ -59,14 +59,13 @@ const ContactSection = () => {
         const templateParams = {
             name: formData.name,
             email: formData.email,
-            phone: formData.phone || 'N/A', // Handle optional fields
+            phone: formData.phone || 'N/A', 
             company: formData.company || 'N/A',
             messageTitle: formData.messageTitle,
             messageBody: formData.messageBody
         };
 
-        console.log("Sending data to EmailJS:", templateParams); // Debugging log
-
+        console.log("Sending data to EmailJS:", templateParams); 
         try {
             const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID);
             console.log('SUCCESS!', response.status, response.text);
