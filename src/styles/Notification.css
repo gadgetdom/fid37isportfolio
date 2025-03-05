@@ -1,0 +1,49 @@
+.notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    animation: bounce-in 0.5s forwards, 
+    bounce-out 0.5s 4.5s forwards;
+    max-width: 400px;
+    width: 90%;
+}
+
+.notification-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 2px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    color: white;
+}
+
+.notification.success {
+    background-color: #22bb33 ;
+}
+
+.notification.error {
+    background-color: #fe979c;
+}
+
+.notification-content button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+@keyframes bounce-in {
+    0% { top: -100px; opacity: 0; }
+    70% { top: 20px; opacity: 1; }
+    100% { top: 20px; opacity: 1; }
+}
+
+@keyframes bounce-out {
+    0% { top: 20px; opacity: 1; }
+    100% { top: -100px; opacity: 0; }
+}

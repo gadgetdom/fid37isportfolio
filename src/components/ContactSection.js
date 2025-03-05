@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
-import { motion } from 'framer-motion';
+import '../styles/ContactSection.css';
+import Notification from './Notification';
 
 const ContactSection = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const ContactSection = () => {
         messageBody: ''
     });
 
+    const [notification, setNotification] = useState(null);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -20,18 +23,38 @@ const ContactSection = () => {
         }));
     };
 
+    const isFormValid = () => {
+        const requiredFields = ['name', 'email', 'messageTitle', 'messageBody'];
+        return requiredFields.every(field => formData[field].trim() !== '');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Validate form
+        if (!isFormValid()) {
+            setNotification({
+                message: 'Please fill in all required fields.',
+                type: 'error'
+            });
+            return;
+        }
+
         // Replace these with your actual EmailJS credentials
-        const SERVICE_ID = 'YOUR_EMAILJS_SERVICE_ID';
-        const TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
+        const SERVICE_ID = 'service_mg74hrj';
+        const TEMPLATE_ID = 'template_k7j82vo';
         const USER_ID = 'YOUR_EMAILJS_USER_ID';
 
         emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, USER_ID)
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
-                alert('Message sent successfully!');
+                
+                // Show success notification
+                setNotification({
+                    message: 'Message sent successfully!',
+                    type: 'success'
+                });
+
                 // Reset form after successful submission
                 setFormData({
                     name: '',
@@ -43,74 +66,75 @@ const ContactSection = () => {
                 });
             }, (err) => {
                 console.log('FAILED...', err);
-                alert('Failed to send message. Please try again.');
+                
+                // Show error notification
+                setNotification({
+                    message: 'Failed to send message. Please try again.',
+                    type: 'error'
+                });
             });
     };
 
     return (
-        <section className="contact-section flex flex-col md:flex-row justify-between p-8 bg-gray-100">
-            <motion.div 
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="contact-info w-full md:w-1/2 mb-6 md:mr-8"
-            >
-                <h1 className="text-3xl font-bold mb-6">Contact Information</h1>
-                <div className="contact-details space-y-4">
+        <section className="contact-section">
+            {/* Notification component */}
+            {notification && (
+                <Notification 
+                    message={notification.message} 
+                    type={notification.type}
+                    onClose={() => setNotification(null)}
+                />
+            )}
+
+            <div className="contact-info">
+                <h1>Contact Information</h1>
+                <div className="contact-details">
                     <div>
-                        <h3 className="font-semibold">Emails</h3>
+                        <h3>Emails</h3>
                         <p>Professional: your.professional.email@example.com</p>
                         <p>Personal: your.personal.email@example.com</p>
                     </div>
                     <div>
-                        <h3 className="font-semibold">Phone Numbers</h3>
+                        <h3>Phone Numbers</h3>
                         <p>Mobile: +1 (123) 456-7890</p>
                         <p>Work: +1 (987) 654-3210</p>
                     </div>
                     <div>
-                        <h3 className="font-semibold">Current Location</h3>
+                        <h3>Current Location</h3>
                         <p>City, State, Country</p>
                         <p>Zip/Postal Code</p>
                     </div>
                 </div>
-            </motion.div>
+            </div>
 
-            <motion.div 
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="contact-form w-full md:w-1/2"
-            >
-                <h1 className="text-3xl font-bold mb-6">Send Me a Message</h1>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="contact-form">
+                <h1>Send Me a Message</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="grid">
                         <input
                             type="text"
                             name="name"
-                            placeholder="Your Name"
+                            placeholder="Your Name *"
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="w-full p-2 border rounded"
                         />
                         <input
                             type="email"
                             name="email"
-                            placeholder="Your Email"
+                            placeholder="Your Email *"
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full p-2 border rounded"
                         />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid">
                         <input
                             type="tel"
                             name="phone"
                             placeholder="Phone Number"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full p-2 border rounded"
                         />
                         <input
                             type="text"
@@ -118,35 +142,32 @@ const ContactSection = () => {
                             placeholder="Company Name"
                             value={formData.company}
                             onChange={handleChange}
-                            className="w-full p-2 border rounded"
                         />
                     </div>
                     <input
                         type="text"
                         name="messageTitle"
-                        placeholder="Message Title"
+                        placeholder="Message Title *"
                         value={formData.messageTitle}
                         onChange={handleChange}
                         required
-                        className="w-full p-2 border rounded"
                     />
                     <textarea
                         name="messageBody"
-                        placeholder="Your Message"
+                        placeholder="Your Message *"
                         value={formData.messageBody}
                         onChange={handleChange}
                         required
-                        rows="5"
-                        className="w-full p-2 border rounded"
                     />
                     <button 
                         type="submit" 
-                        className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600 transition duration-300"
+                        disabled={!isFormValid()}
+                        className={!isFormValid() ? 'disabled' : ''}
                     >
                         Send Message
                     </button>
                 </form>
-            </motion.div>
+            </div>
         </section>
     );
 };
