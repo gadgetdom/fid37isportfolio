@@ -42,9 +42,7 @@ const Navbar = ({ name }) => {
                 {/* Right-aligned Menu */}
                 <div className={`navbar-menu ${isOpen ? "open" : ""}`}>
                     {[
-                        { path: "/devops", label: "DevOps" },
                         { path: "/work", label: "My Works" },
-                        { path: "/blog", label: "Blog" },
                         { path: "/archives", label: "Archives" }
                     ].map(({ path, label }) => (
                         <Link 

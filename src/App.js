@@ -2,9 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import DevOps from './pages/DevOps';
 import MyWorks from './pages/MyWorks';
-import Blog from './pages/Blog';
 import Archives from './pages/Archives';
 import Footer from './components/Footer';
 import { AnimatePresence } from 'framer-motion';
@@ -15,7 +13,6 @@ function App() {
   const userData = {
     name: "FIDELIS AGBA",
     username: "fid37is",
-    phoneNumber: "+2348085952266"
   };
 
   return (
@@ -27,9 +24,7 @@ function App() {
             <main className="content flex-grow p-4">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/devops" element={<DevOps />} />
                 <Route path="/work" element={<MyWorks />} />
-                <Route path="/blog" element={<Blog />} />
                 <Route path="/archives" element={<Archives />} />
               </Routes>
             </main>
